@@ -12,12 +12,14 @@ public class ServietteType {
     private String name;
     private int quantite;
     private String reference;
+    private int prix;
 
-    public ServietteType(Long id, String name, int quantite, String reference) {
+    public ServietteType(Long id, String name, int quantite, String reference, int prix) {
         this.id = id;
         this.name = name;
         this.quantite = quantite;
         this.reference = reference;
+        this.prix = prix;
     }
 
     public Long getId() {
@@ -32,6 +34,9 @@ public class ServietteType {
     public String getReference() {
         return reference;
     }
+    public int getPrix() {
+        return prix;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -44,5 +49,8 @@ public class ServietteType {
     }
     public void setReference(String reference) {
         this.reference = reference;
+    }
+    public void setPrix(int prix) {
+        this.prix = prix;
     }
 }
