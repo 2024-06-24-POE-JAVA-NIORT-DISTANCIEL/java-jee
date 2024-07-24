@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Panier {
-    private List<Article> articles;
+    private List<ServietteType> articles;
 
     public Panier() {
         this.articles = new ArrayList<>();
     }
 
-    public List<Article> getArticles() {
+    public List<ServietteType> getArticles() {
         return articles;
     }
 
-    public void addArticle(Article article) {
+    public void addArticle(ServietteType article) {
         this.articles.add(article);
     }
 }

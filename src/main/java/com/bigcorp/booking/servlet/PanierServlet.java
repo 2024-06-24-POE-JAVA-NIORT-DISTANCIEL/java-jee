@@ -1,6 +1,6 @@
 package com.bigcorp.booking.servlet;
 
-import com.bigcorp.booking.model.Article;
+import com.bigcorp.booking.model.ServietteType;
 import com.bigcorp.booking.model.Panier;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -27,7 +27,7 @@ public class PanierServlet extends HttpServlet {
             session.setAttribute("panier", panier);
         }
 
-        List<Article> articles = panier.getArticles();
+        List<ServietteType> articles = panier.getArticles();
 
         response.setContentType("text/html");
         try (PrintWriter out = response.getWriter()) {
@@ -42,7 +42,7 @@ public class PanierServlet extends HttpServlet {
                 out.println("<p>Votre panier est vide.</p>");
             } else {
                 out.println("<ul>");
-                for (Article article : articles) {
+                for (ServietteType article : articles) {
                     out.println("<li>" + article.getName() + " - " + article.getPrix() + "€</li>");
                 }
                 out.println("</ul>");
@@ -68,7 +68,8 @@ public class PanierServlet extends HttpServlet {
         String articleName = request.getParameter("articleName");
         int prix = Integer.parseInt(request.getParameter("prix"));
 
-        Article article = new Article();
+        ServietteType article = new ServietteType(2L, "Sanctuaire", 20,"h4h5",35, "coton biologique, 75cm");
+        ;
         article.setName(articleName);
         article.setPrix(prix);
 
