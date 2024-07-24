@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Une Servlet JEE
@@ -53,7 +54,9 @@ public class ServietteDetail extends HttpServlet {
 
                 Serviette maServiette = towelStore.getArticles().get((idServietteParametre - 1));
 
-                context.setAttribute("currentTowel", maServiette);
+                HttpSession session = request.getSession();
+
+                session.setAttribute("currentTowel", maServiette);
 
                 out.println("<script> let addArticle = async () => { await fetch('http://localhost:8080/booking-jee-wildfly/serviette/ajout', { method:'GET', headers: { 'Access-Control-Allow-Origin':'*' } }); }; </script>");
 
