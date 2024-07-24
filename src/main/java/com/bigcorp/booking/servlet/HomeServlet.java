@@ -28,6 +28,8 @@ public class HomeServlet extends HttpServlet {
         serviettes.add(new Serviette(" ServietteQualité1", 1));
         serviettes.add(new Serviette("ServietteQualité2", 2));
         serviettes.add(new Serviette("ServietteQualité3", 3));
+        serviettes.add(new Serviette("ServietteQualité4", 4));
+        serviettes.add(new Serviette("ServietteQualité5", 5));
     }
 
 
