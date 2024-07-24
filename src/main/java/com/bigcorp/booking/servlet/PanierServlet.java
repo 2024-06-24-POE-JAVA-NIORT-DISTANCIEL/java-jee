@@ -68,7 +68,7 @@ public class PanierServlet extends HttpServlet {
         String articleName = request.getParameter("articleName");
         int prix = Integer.parseInt(request.getParameter("prix"));
 
-        ServietteType article = new ServietteType(2L, "Sanctuaire", 20,"h4h5",35, "coton biologique, 75cm");
+        ServietteType article = new ServietteType(2, "Sanctuaire", 20,"h4h5",35, "coton biologique, 75cm");
         ;
         article.setName(articleName);
         article.setPrix(prix);

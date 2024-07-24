@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 public class ServietteType {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private String name;
     private int quantite;
@@ -15,7 +15,7 @@ public class ServietteType {
     private int prix;
     private String description;
 
-    public ServietteType(Long id, String name, int quantite, String reference, int prix, String description) {
+    public ServietteType(int id, String name, int quantite, String reference, int prix, String description) {
         this.id = id;
         this.name = name;
         this.quantite = quantite;
@@ -24,7 +24,7 @@ public class ServietteType {
         this.description = description;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
     public String getName() {
@@ -43,7 +43,7 @@ public class ServietteType {
         return description;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
     public void setName(String name) {

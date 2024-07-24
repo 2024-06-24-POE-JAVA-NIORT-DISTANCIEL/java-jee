@@ -26,7 +26,8 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/response")
 public class ResponseServlet extends HttpServlet {
 
-    @Override
+
+   @Override
     public void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
