@@ -1,4 +1,4 @@
-package com.bigcorp.booking.model.TpFinal;
+package com.bigcorp.booking.model.tpfinal;
 
 import java.util.TreeMap;
 

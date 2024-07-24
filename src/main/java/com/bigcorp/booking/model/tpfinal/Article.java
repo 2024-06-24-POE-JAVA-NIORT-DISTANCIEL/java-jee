@@ -1,16 +1,16 @@
-package com.bigcorp.booking.model.TpFinal;
+package com.bigcorp.booking.model.tpfinal;
 
 public class Article {
 
-
-    private static int ID = 1;
+    private static int compteur = 0;
+    private static int ID;
     private String name;
     private String detail;
 
     public Article(String name, String detail) {
         this.name = name;
         this.detail = detail;
-        ID++;
+        this.ID = ++compteur;
     }
 
     public String getName() {

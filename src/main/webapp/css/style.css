@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+AR:wght@100..400&display=swap');
+
+.playwrite-ar-cursive {
+  font-family: "Playwrite AR", cursive;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+
+body {
+    background-color: #ffea8b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+  width: 42rem;
+  text-align: center;
+}
+
+.infoBox {
+  margin: 0 auto;
+  width: 16rem;
+  text-align: center;
+}

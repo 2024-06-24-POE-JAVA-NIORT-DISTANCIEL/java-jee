@@ -1,6 +1,7 @@
 package com.bigcorp.booking.servlet;
 
-import com.bigcorp.booking.model.TpFinal.Article;
+import com.bigcorp.booking.model.tpfinal.Article;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Set;
 import java.util.TreeMap;
 
 @WebServlet("/serviette/home")
@@ -19,6 +21,7 @@ public class HomeServlet extends HttpServlet {
                       HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        ServletContext servletContext = request.getServletContext();
 
         Article ar1 = new Article("Serviette de Bain Luxueuse", " Cette serviette de bain en coton égyptien offre une douceur exceptionnelle et une grande absorption, " +
                 "parfaite pour une expérience spa à domicile. Taille généreuse pour un confort optimal.");
@@ -41,28 +44,44 @@ public class HomeServlet extends HttpServlet {
         Article ar10 = new Article("Serviette de Bain à Séchage Rapide", "Conçue pour un usage quotidien, " +
                 "cette serviette en microfibre sèche rapidement et reste douce après de nombreux lavages, idéale pour les foyers occupés.");
 
+        TreeMap<Integer, Article> magasin = new TreeMap<>();
+
+        magasin.put(1, ar1);
+        magasin.put(2, ar2);
+        magasin.put(3, ar3);
+        magasin.put(4, ar4);
+        magasin.put(5, ar5);
+        magasin.put(6, ar6);
+        magasin.put(7, ar7);
+        magasin.put(8, ar8);
+        magasin.put(9, ar9);
+        magasin.put(10, ar10);
+
+        servletContext.setAttribute("magasin", magasin);
+        Set<Integer> keySet = magasin.keySet();
+
         try (PrintWriter out = response.getWriter()) {
+            out.println("<html>"
+                    + "<head><title>Serviettes en folie</title><style>@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');.cpt{font-size:100;font-weight:900; font-family: Orbitron;}</style>" +
+                    "<link href=\"${pageContext.request.contextPath}/css/style.css\" rel=\"stylesheet\" />\n" +                   "" +
+                    "</head>");
+            out.println("<body style='height:100vh; background: linear-gradient(180deg, rgba(119,8,26,1) 0%, rgba(176,3,40,0.9962184702982756) 35%, rgba(110,6,42,1) 100%); color:#fff3b5; display:flex; flex-direction:column; justify-content:center; align-items: center; margin: 0;'>");
             out.println("<h1>Nous vous souhaitons la bienvenue</h1>");
             out.println("<h3 style='text-align: center;'>Des serviettes comme vous n'en n'avez jamais vu !</h3>");
             out.println("<table border='1' style='border-color: #f2eedf; width: 50%; margin: 0 auto; margin-bottom: 10rem; border-collapse: collapse; color: #fff3b5;'>");
             out.println("<tr><th style='padding: 8px; background-color: #333;'>Modèles </th><th style='padding: 8px; background-color: #333;'>Description</th></tr>");
 
-            TreeMap<Integer, Article> magasin = new TreeMap<>();
-            magasin.put(ar1.getID(), ar1);
-            magasin.put(ar2.getID(), ar2);
-            magasin.put(ar3.getID(), ar3);
-            magasin.put(ar4.getID(), ar4);
-            magasin.put(ar5.getID(), ar5);
-            magasin.put(ar6.getID(), ar6);
-            magasin.put(ar7.getID(), ar7);
-            magasin.put(ar8.getID(), ar8);
-            magasin.put(ar9.getID(), ar9);
-            magasin.put(ar10.getID(), ar10);
-
-            for (Article objet : magasin.values()) {
-                out.println("<tr><td style='padding: 8px;'>" + objet.getName() + "</td><td style='padding: 8px;'>" + "<a href=./detail>Detail article</a>" + "</td></tr>");
+//            for (Article objet : magasin.values()) {
+//                out.println("<tr><td style='padding: 8px;'>" + objet.getName() + "</td><td style='padding: 8px;'>" + "<a href=./detail?id=" + objet.getID() + ">Detail article</a>" + "</td></tr>");
+//            }
+            for (Integer key : keySet){
+                Article objet = magasin.get(key);
+                out.println("<tr><td style='padding: 8px;'>" + objet.getName() + "</td><td style='padding: 8px;'>" + "<a href=./detail?id=" + objet.getID() + ">Detail article</a>" + "</td></tr>");
             }
+
             out.println("</table>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
