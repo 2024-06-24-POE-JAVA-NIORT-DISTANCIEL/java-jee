@@ -6,10 +6,11 @@ FONT SIZE SYSTEM (px)
 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
 */
 
+
 /*
 Noir : #000000
 Rouge : (255, 0, 0)
-Violet : #5d00e5
+Violet :  #4B0082;
 */
 
 * {
@@ -24,7 +25,7 @@ Violet : #5d00e5
 body {
   color: rgb(255, 0, 0); /* Texte en rouge */
     background-color: #000000; /* Fond noir */
-    border-bottom: 8px solid #5d00e5; /* Bordure inférieure en violet foncé */
+    border-bottom: 8px solid #4B0082; /* Bordure inférieure en violet foncé */
 }
 
 .container {
@@ -43,7 +44,14 @@ section {
   padding: 0;
   margin: 0;
   display: flex;
-  background-color: #5d00e5;
+  background-color: #4B0082;
+}
+
+.img-head {
+width: 160px;
+  height: 100%;
+  margin-right: 12px;
+transform: translateY(-120px);
 }
 
 .menu li {
@@ -90,7 +98,7 @@ h2 {
 
 .btn:link,
 .btn:visited {
-  background-color: #5d00e5;
+  background-color: #4B0082;
   color: #fff;
   text-decoration: none;
   text-transform: uppercase;
@@ -190,7 +198,7 @@ img {
   width: 100%;
   height: 2px;
   z-index: -10;
-  background: #5d00e5;
+  background: #4B0082;
   transform: translateX(-50%);
 }
 
@@ -213,7 +221,7 @@ img {
   content: "";
   width: 2.5rem;
   height: 2.5rem;
-   background: #5d00e5;
+   background: #4B0082;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -256,11 +264,11 @@ img {
 
 .unActive .count:after {
   background: #000000;
-  border: 2px solid #e65b00;
+  border: 2px solid rgb(255, 0, 0);
 }
 
 .unActive .count {
-  color: #5d00e5;
+  color: #4B0082;
 }
 
 a {
@@ -270,8 +278,8 @@ a {
 
 /* TESTIMONIAL */
 .testimonial-section {
-  background-color: #5d00e5;
-  color: #fff;
+  background-color: #4B0082;
+  color: rgb(255, 0, 0);
   padding: 24px;
   border-radius: 12px;
 }
@@ -292,11 +300,11 @@ a {
   margin-bottom: 24px;
   font-size: 18px;
   line-height: 1.7;
-  color: #e6fcf5;
+  color: rgb(255, 0, 0);
 }
 
 .testimonial-author {
-  color: #c3fae8;
+  color: rgb(255, 0, 0);
 }
 
 /* CARDS */
@@ -304,6 +312,7 @@ a {
   box-shadow: 0 20px 30px 0 rgba(0, 0, 0, 0.07);
   border-radius: 12px;
   justify-content: center;
+  border: 2px solid #4B0082;
 }
 .img-card {
   border-bottom-left-radius: 0;
@@ -335,7 +344,7 @@ h3 {
 }
 
 .card-icon {
-  stroke: #5d00e5;
+  stroke: #4B0082;
   width: 24px;
   height: 24px;
 }
