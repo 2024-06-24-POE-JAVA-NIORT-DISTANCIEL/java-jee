@@ -41,6 +41,7 @@ public class DetailServlet extends HttpServlet {
                 out.println("<a href=./home>Page accueil</a>");
             } else {
                 out.println("<h1>Nous sommes désolés, nous n'avons pas de détails sur cet article");
+                out.println("<img src='http://localhost:8080/booking-jee-wildfly/img/mandala.jpg' />");
             }
         }
     }

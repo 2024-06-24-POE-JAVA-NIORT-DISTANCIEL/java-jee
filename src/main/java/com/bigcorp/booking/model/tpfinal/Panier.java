@@ -4,12 +4,14 @@ import java.util.TreeMap;
 
 public class Panier {
 
-    private static int id = 0;
+    private static int cpt = 0;
+    private int id;
+
     TreeMap<Integer, Article> contenu;
 
     public Panier(TreeMap<Integer, Article> contenu) {
         this.contenu = contenu;
-        id++;
+        id = cpt++;
     }
 
     public void afficher() {
@@ -19,10 +21,14 @@ public class Panier {
     }
 
     public void ajouterAuPanier(Article article) {
-        contenu.put(Article.getID(), article);
+        contenu.put(article.getID(), article);
     }
 
     public void retirerDuPanier(Article article) {
-        contenu.remove(Article.getID(), article);
+        contenu.remove(article.getID(), article);
+    }
+
+    public int getId() {
+        return id;
     }
 }

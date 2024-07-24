@@ -46,16 +46,16 @@ public class HomeServlet extends HttpServlet {
 
         TreeMap<Integer, Article> magasin = new TreeMap<>();
 
-        magasin.put(1, ar1);
-        magasin.put(2, ar2);
-        magasin.put(3, ar3);
-        magasin.put(4, ar4);
-        magasin.put(5, ar5);
-        magasin.put(6, ar6);
-        magasin.put(7, ar7);
-        magasin.put(8, ar8);
-        magasin.put(9, ar9);
-        magasin.put(10, ar10);
+        magasin.put(ar1.getID(), ar1);
+        magasin.put(ar2.getID(), ar2);
+        magasin.put(ar3.getID(), ar3);
+        magasin.put(ar4.getID(), ar4);
+        magasin.put(ar5.getID(), ar5);
+        magasin.put(ar6.getID(), ar6);
+        magasin.put(ar7.getID(), ar7);
+        magasin.put(ar8.getID(), ar8);
+        magasin.put(ar9.getID(), ar9);
+        magasin.put(ar10.getID(), ar10);
 
         servletContext.setAttribute("magasin", magasin);
         Set<Integer> keySet = magasin.keySet();
@@ -71,9 +71,6 @@ public class HomeServlet extends HttpServlet {
             out.println("<table border='1' style='border-color: #f2eedf; width: 50%; margin: 0 auto; margin-bottom: 10rem; border-collapse: collapse; color: #fff3b5;'>");
             out.println("<tr><th style='padding: 8px; background-color: #333;'>Modèles </th><th style='padding: 8px; background-color: #333;'>Description</th></tr>");
 
-//            for (Article objet : magasin.values()) {
-//                out.println("<tr><td style='padding: 8px;'>" + objet.getName() + "</td><td style='padding: 8px;'>" + "<a href=./detail?id=" + objet.getID() + ">Detail article</a>" + "</td></tr>");
-//            }
             for (Integer key : keySet){
                 Article objet = magasin.get(key);
                 out.println("<tr><td style='padding: 8px;'>" + objet.getName() + "</td><td style='padding: 8px;'>" + "<a href=./detail?id=" + objet.getID() + ">Detail article</a>" + "</td></tr>");

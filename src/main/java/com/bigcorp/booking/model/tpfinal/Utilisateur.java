@@ -1,8 +1,8 @@
 package com.bigcorp.booking.model.tpfinal;
 
 public class Utilisateur {
-
-    private static int id = 0;
+    private static int cpt = 0;
+    private int id;
     private String firstName;
     private String lastName;
     private String email;
@@ -13,7 +13,7 @@ public class Utilisateur {
         this.lastName = lastName;
         this.email = email;
         this.panier = panier;
-        id++;
+        id = cpt++;
     }
 
     public String getFirstName() {
@@ -40,7 +40,7 @@ public class Utilisateur {
         this.email = email;
     }
 
-    public static int getId() {
+    public int getId() {
         return id;
     }
 

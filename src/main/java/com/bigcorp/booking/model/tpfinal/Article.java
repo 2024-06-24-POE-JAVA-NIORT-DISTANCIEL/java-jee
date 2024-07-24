@@ -3,7 +3,7 @@ package com.bigcorp.booking.model.tpfinal;
 public class Article {
 
     private static int compteur = 0;
-    private static int ID;
+    private int ID;
     private String name;
     private String detail;
 
@@ -29,7 +29,7 @@ public class Article {
         this.detail = detail;
     }
 
-    public static int getID() {
+    public int getID() {
         return ID;
     }
 }
