@@ -1,8 +1,5 @@
 package com.bigcorp.booking.servlet;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,35 +7,34 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-/**
- * Une Servlet JEE
- */
+import java.io.IOException;
+import java.io.PrintWriter;
+
 @WebServlet("/welcome")
 public class GreetingServlet extends HttpServlet {
-	
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Traite les requêtes GET /welcome 
-	 */
-	@Override
+    private static final long serialVersionUID = 1L;
+
+    @Override
     public void doGet(HttpServletRequest request,
-            HttpServletResponse response)
+                      HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.setContentType("text/html");
+        response.setContentType("text/html;charset=UTF-8");
         response.setBufferSize(8192);
+
+        // Le out permet d'écrire dans une page html grâce au request et response
         try (PrintWriter out = response.getWriter()) {
             out.println("<html>"
                     + "<head><title>Booking</title></head>");
             out.println("<body  bgcolor=\"#ffffff\">"
-                    + "<h2>Welcome to the booking app servlet page !!!</h2>");
-            
+                    + "<h2>hello world ! ! ! </h2>");
+
             String username = request.getParameter("username");
-            if (username != null && username.length() > 0) {
+            if (username != null && !username.isEmpty()) {
                 RequestDispatcher dispatcher =
                         getServletContext().getRequestDispatcher("/response");
-                
+
                 if (dispatcher != null) {
                     dispatcher.include(request, response);
                 }

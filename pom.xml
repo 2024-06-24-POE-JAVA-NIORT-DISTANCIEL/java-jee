@@ -226,6 +226,9 @@
                 <version>${version.compiler.plugin}</version>
                 <configuration>
                     <!-- put your configurations here -->
+                    <source>21</source>
+                    <target>21</target>
+                    <compilerArgs>--enable-preview</compilerArgs>
                 </configuration>
             </plugin>
 
