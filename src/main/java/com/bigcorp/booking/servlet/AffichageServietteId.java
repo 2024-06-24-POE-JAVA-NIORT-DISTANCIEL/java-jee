@@ -51,7 +51,7 @@ import static java.lang.Integer.parseInt;
             out.println("<html><body>");
             out.println("<h1>" + serviette.getName() + "</h1>");
             out.println("<div>" + serviette.getDescription() + "</div>");
-            out.println("<a href='/'>Retour à la page d'accueil</a>");
+            out.println("<a href='/booking-jee-wildfly'>Retour à la page d'accueil</a>");
             out.println("</body></html>"); }
     }
 

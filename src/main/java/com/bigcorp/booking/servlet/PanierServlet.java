@@ -48,7 +48,7 @@ public class PanierServlet extends HttpServlet {
                 out.println("</ul>");
             }
 
-            out.println("<a href='./home'>Retour à la page d'accueil</a>");
+            out.println("<a href='/booking-jee-wildfly'>Retour à la page d'accueil</a>");
             out.println("</body>");
             out.println("</html>");
         }
