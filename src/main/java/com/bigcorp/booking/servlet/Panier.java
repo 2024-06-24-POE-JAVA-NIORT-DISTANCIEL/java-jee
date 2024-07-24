@@ -56,7 +56,7 @@ public class Panier extends HttpServlet {
                 }
 
                 if (utilisateur.getPanier().isEmpty()) {
-                    out.print("Aucune serviette dans votre panier");
+                    out.print("<p> Aucune serviette dans votre panier </p>");
                 }
             }
             catch (Exception e) {

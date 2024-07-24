@@ -13,28 +13,16 @@
     }
 }
 
-.servietteDetail article {
-    h2 {
-        margin: 8px;
-        color: #232323 !important;
-    }
-
-    p {
-        margin: 8px;
-        color: #232323 !important;
-    }
+h2 {
+    position: relative;
+    left: 8px;
+    color: #232323 !important;
 }
 
-.panier article {
-    h2 {
-        margin: 8px;
-        color: #232323 !important;
-    }
-
-    p {
-        margin: 8px;
-        color: #232323 !important;
-    }
+p {
+    position: relative;
+    left: 8px;
+    color: #232323 !important;
 }
 
 a {
@@ -43,7 +31,7 @@ a {
 }
 
 #buttonPanier {
-    margin: 8px;
-    display: flex;
-    align-items: flex-end;
+    position: absolute;
+    top: 8px;
+    right: 8px;
 }
