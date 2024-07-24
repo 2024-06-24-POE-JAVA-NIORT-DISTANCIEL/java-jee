@@ -5,12 +5,13 @@ import java.io.PrintWriter;
 
 import com.bigcorp.booking.classesStore.Magasin;
 import com.bigcorp.booking.classesStore.Serviette;
+
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  * Une Servlet JEE
@@ -47,12 +48,12 @@ public class ServietteDetail extends HttpServlet {
             try {
                 Integer idServietteParametre = Integer.parseInt(request.getParameter("id"));
 
-                HttpSession session = request.getSession();
-                Magasin towelStore = (Magasin) session.getAttribute("magasin");
+                ServletContext context = request.getServletContext();
+                Magasin towelStore = (Magasin) context.getAttribute("magasin");
 
                 Serviette maServiette = towelStore.getArticles().get((idServietteParametre - 1));
 
-                session.setAttribute("currentTowel", maServiette);
+                context.setAttribute("currentTowel", maServiette);
 
                 out.println("<script> let addArticle = async () => { await fetch('http://localhost:8080/booking-jee-wildfly/serviette/ajout', { method:'GET', headers: { 'Access-Control-Allow-Origin':'*' } }); }; </script>");
 

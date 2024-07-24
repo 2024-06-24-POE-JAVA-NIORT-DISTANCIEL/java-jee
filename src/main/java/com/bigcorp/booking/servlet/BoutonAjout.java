@@ -29,8 +29,6 @@ public class BoutonAjout extends HttpServlet {
             Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 
             utilisateur.addToPanier(maServiette);
-
-            session.setAttribute("utilisateur", utilisateur);
         }
         catch (Exception e) {
             response.setStatus(404);

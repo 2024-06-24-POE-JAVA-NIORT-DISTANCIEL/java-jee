@@ -11,10 +11,6 @@ public class Serviette {
     }
 
     private void updateCompteur() {
-        if (compteur >= 3) {
-            compteur = 0;
-        }
-
         compteur++;
         id = compteur;
     }

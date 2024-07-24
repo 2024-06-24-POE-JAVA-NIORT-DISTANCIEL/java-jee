@@ -7,6 +7,7 @@ import com.bigcorp.booking.classesStore.Magasin;
 import com.bigcorp.booking.classesStore.Serviette;
 import com.bigcorp.booking.classesStore.Utilisateur;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -44,7 +45,8 @@ public class ServietteHome extends HttpServlet {
             
             HttpSession session = request.getSession();
 
-            Magasin towelStore = (Magasin) session.getAttribute("magasin");
+            ServletContext context = request.getServletContext();
+            Magasin towelStore = (Magasin) context.getAttribute("magasin");
             Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 
             if (towelStore == null && utilisateur == null) {
@@ -58,10 +60,10 @@ public class ServietteHome extends HttpServlet {
                 towelStore.addArticle(servietteBernard);
                 towelStore.addArticle(servietteGulvial);
                 towelStore.addArticle(serviettePorto);
-            }
 
-            session.setAttribute("magasin", towelStore);
-            session.setAttribute("utilisateur", utilisateur);
+                context.setAttribute("magasin", towelStore);
+                session.setAttribute("utilisateur", utilisateur);
+            }
 
             out.println("<div class='articles'>");
 
