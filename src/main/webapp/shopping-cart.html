@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Panier</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/shopping-cart.css">
+</head>
+<body>
+<header>
+    <h1>Mon Panier</h1>
+</header>
+
+<div class="container">
+    <ul>
+        <c:forEach var="towel" items="${cart}">
+            <li>${towel.name}</li>
+        </c:forEach>
+    </ul>
+    <a href="${pageContext.request.contextPath}/towel/home">Retour à l'accueil</a>
+</div>
+
+<footer>
+    <p>&copy; 2024 Magasin de serviettes</p>
+</footer>
+</body>
+</html>

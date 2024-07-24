@@ -10,8 +10,19 @@ public class ShoppingCart {
         this.towels = new ArrayList<>();
     }
 
+    public void addTowel(Towel towel) {
+        towels.add(towel);
+    }
+
+    public void removeTowel(Towel towel) {
+        towels.remove(towel);
+    }
+
     public List<Towel> getTowels() {
         return towels;
     }
-}
 
+    public void setTowels(List<Towel> towels) {
+        this.towels = towels;
+    }
+}

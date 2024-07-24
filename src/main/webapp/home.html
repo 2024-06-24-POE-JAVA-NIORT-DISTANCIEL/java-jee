@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
+    <link rel="stylesheet" href="./css/home.css">
+</head>
+<body>
+<header>
+    <h1>Bienvenue dans notre magasin de serviettes</h1>
+</header>
+
+<div class="container">
+    <h2>Liste des serviettes</h2>
+    <ul>
+        <!-- Utilisation des données injectées depuis le servlet -->
+        <c:forEach var="towel" items="${towels}">
+            <li><a href="/towel/detail?id=${towel.id}">${towel.name}</a></li>
+        </c:forEach>
+    </ul>
+    <p><a href="/towel/login">Connexion</a></p>
+    <p><a href="/towel/signup">S'inscrire</a></p>
+</div>
+
+<footer>
+    <p>&copy; 2024 Magasin de serviettes</p>
+</footer>
+</body>
+</html>
