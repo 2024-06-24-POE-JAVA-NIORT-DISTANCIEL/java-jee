@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/produit")
+@WebServlet("/serviette/detail")
 public class AffichageServietteId extends HttpServlet {
 
    @Override
