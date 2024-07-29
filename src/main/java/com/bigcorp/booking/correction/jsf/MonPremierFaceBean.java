@@ -34,4 +34,13 @@ public class MonPremierFaceBean {
     public void setDateCourante(LocalDateTime dateCourante) {
         this.dateCourante = dateCourante;
     }
+
+    /**
+     * Méthode de navigation
+     * @return
+     */
+    public String nextPage(){
+        System.out.println("On va vers la page 2");
+        return "page-2";
+    }
 }

@@ -17,5 +17,14 @@
     <div>Ici un message de JSF : #{monPremierFaceBean.message}</div>
     <div>La date du jour vaut : #{monPremierFaceBean.dateCourante}</div>
     <!-- dynamisation de la page avec Expression Language : on appelle monPremierFaceBean.getMessage() -->
+    <a href="./page-2.jsf"> Le lien vers la page 2</a>
+
+    <h:form>
+        <h:commandLink action="${monPremierFaceBean.nextPage}">
+            Cliquez ici pour aller dans la page 2
+        </h:commandLink>
+        //va déclencher l’action createNew et ouvrir la vue renvoyée par cette méthode
+    </h:form>
+
 </h:body>
 </html>
