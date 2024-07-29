@@ -20,6 +20,27 @@
 </h:head>
 <h:body>
     <div>Gestion des types de restaurant</div>
-    <p> J'ai chargé un type de restaurant, il a l'id : #{typeRestaurantFaceBean.typeRestaurantFormBean.id}</p>
+
+    <h:form prependId="false">
+        <h2>Type de restaurant</h2>
+        <p>
+            <label for="id">Id :</label>
+            <br/>
+            <h:inputText id="id" type="text"
+                         placeholder="id" value="#{typeRestaurantFaceBean.typeRestaurantFormBean.id}"
+                         required="required" title="id"/>
+        </p>
+        <p>
+            <label for="nom">Value :</label>
+            <br/>
+            <h:inputText id="nom" type="text"
+                         placeholder="value" value="#{typeRestaurantFaceBean.typeRestaurantFormBean.nom}"
+                         required="required" title="Value"/>
+        </p>
+        <p>
+            <h:commandButton value="Sauvegarder" action="#{typeRestaurantFaceBean.save}" />
+        </p>
+    </h:form>
+
 </h:body>
 </html>

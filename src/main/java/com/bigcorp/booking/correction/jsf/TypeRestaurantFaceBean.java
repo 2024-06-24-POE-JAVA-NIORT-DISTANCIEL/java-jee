@@ -10,7 +10,7 @@ public class TypeRestaurantFaceBean {
 
     private String id;
 
-    private TypeRestaurantFormBean typeRestaurantFormBean;
+    private TypeRestaurantFormBean typeRestaurantFormBean = new TypeRestaurantFormBean();
 
     public String getId() {
         return id;
@@ -32,5 +32,11 @@ public class TypeRestaurantFaceBean {
         System.out.println("Je charge un type de restaurant, avec l'id : " + id);
         this.typeRestaurantFormBean = new TypeRestaurantFormBean();
         this.typeRestaurantFormBean.setId(this.id);
+    }
+
+    public void save(){
+        System.out.println("Je sauvegarde le restaurant");
+        System.out.println("L'id vaut : " + this.typeRestaurantFormBean.getId());
+        System.out.println("Le nom vaut : " + this.typeRestaurantFormBean.getNom());
     }
 }
