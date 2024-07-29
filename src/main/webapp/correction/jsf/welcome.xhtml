@@ -18,8 +18,13 @@
     <div>La date du jour vaut : #{monPremierFaceBean.dateCourante}</div>
     <!-- dynamisation de la page avec Expression Language : on appelle monPremierFaceBean.getMessage() -->
     <a href="./page-2.jsf"> Le lien vers la page 2</a>
-
     <h:form>
+        <br/>
+        <h:outputLink value="gestion-type-restaurant.jsf" >
+            <f:param name="id" value="12"/>
+            Le lien vers la gestion des types de restaurant
+        </h:outputLink>
+        <br/>
         <h:commandLink action="${monPremierFaceBean.nextPage}">
             Cliquez ici pour aller dans la page 2
         </h:commandLink>

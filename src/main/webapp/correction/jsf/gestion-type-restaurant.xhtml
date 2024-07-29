@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:h="jakarta.faces.html"
+        xmlns:f="jakarta.faces.core"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:fn="jakarta.tags.functions">
+
+<!-- Actions qui ont lieu au chargement de la page : appel d'un setter et d'une méthode onLoad -->
+<f:metadata>
+    <f:viewParam name="id" value="#{typeRestaurantFaceBean.id}" />
+    <f:viewAction action="#{typeRestaurantFaceBean.onLoad}" />
+</f:metadata>
+
+<h:head>
+
+</h:head>
+<h:body>
+    <div>Gestion des types de restaurant</div>
+    <p> J'ai chargé un type de restaurant, il a l'id : #{typeRestaurantFaceBean.typeRestaurantFormBean.id}</p>
+</h:body>
+</html>
