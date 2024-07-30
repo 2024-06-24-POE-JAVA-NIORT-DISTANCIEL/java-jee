@@ -2,8 +2,10 @@ package com.bigcorp.booking.correction.service;
 
 import com.bigcorp.booking.correction.jsf.TypeRestaurantFormBean;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Named;
 
 import java.lang.reflect.Type;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,15 +33,20 @@ public class TypeRestaurantService {
      * Sauvegarde un {@link TypeRestaurantFormBean}.
      * Ecrase le précédent TypeRestaurantFormBean avec le même id.
      * @param typeRestaurantFormBean non null
-     * @return
      */
-    public TypeRestaurantFormBean save(TypeRestaurantFormBean typeRestaurantFormBean){
+    public void save(TypeRestaurantFormBean typeRestaurantFormBean){
         System.out.println("Sauvegarde du restaurant dans le service");
         if(typeRestaurantFormBean.getId() == null){
             typeRestaurantFormBean.setId(compteur++);
         }
         this.referentielDeDonnees.put(typeRestaurantFormBean.getId(), typeRestaurantFormBean);
-        return typeRestaurantFormBean;
     }
 
+    /**
+     * Renvoie tous les restaurants précédemment sauvegardés
+     * @return
+     */
+    public Collection<TypeRestaurantFormBean> findAll() {
+        return this.referentielDeDonnees.values();
+    }
 }

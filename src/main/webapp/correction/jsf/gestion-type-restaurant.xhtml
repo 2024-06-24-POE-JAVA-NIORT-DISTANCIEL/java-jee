@@ -28,7 +28,8 @@
             <br/>
             <h:inputText id="id" type="number"
                          placeholder="id" value="#{typeRestaurantFaceBean.typeRestaurantFormBean.id}"
-                         />
+                         validatorMessage="L'identifiant doit être positif." />
+            <h:message for="id" />
         </p>
         <p>
             <label for="nom">Nom :</label>
@@ -36,6 +37,7 @@
             <h:inputText id="nom" type="text"
                          placeholder="nom" value="#{typeRestaurantFaceBean.typeRestaurantFormBean.nom}"
                          />
+            <h:message for="nom" />
         </p>
         <p>
             <label for="actif">Actif :</label>
@@ -43,10 +45,15 @@
             <h:selectBooleanCheckbox id="actif"
                          value="#{typeRestaurantFaceBean.typeRestaurantFormBean.actif}"
                          />
+            <h:message for="actif" />
         </p>
         <p>
             <h:commandButton value="Sauvegarder" action="#{typeRestaurantFaceBean.save}" />
         </p>
+        <p>
+            <h:commandButton value="Annuler et revenir au tableau des restaurants" action="#{typeRestaurantFaceBean.cancel}" immediate="true" />
+        </p>
+        <!-- on pourrait mettre ici un composant h:messages pour afficher tous les messages de validation>
     </h:form>
 
 </h:body>
