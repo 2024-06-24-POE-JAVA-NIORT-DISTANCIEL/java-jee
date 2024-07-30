@@ -26,16 +26,23 @@
         <p>
             <label for="id">Id :</label>
             <br/>
-            <h:inputText id="id" type="text"
+            <h:inputText id="id" type="number"
                          placeholder="id" value="#{typeRestaurantFaceBean.typeRestaurantFormBean.id}"
-                         required="required" title="id"/>
+                         />
         </p>
         <p>
-            <label for="nom">Value :</label>
+            <label for="nom">Nom :</label>
             <br/>
             <h:inputText id="nom" type="text"
-                         placeholder="value" value="#{typeRestaurantFaceBean.typeRestaurantFormBean.nom}"
-                         required="required" title="Value"/>
+                         placeholder="nom" value="#{typeRestaurantFaceBean.typeRestaurantFormBean.nom}"
+                         />
+        </p>
+        <p>
+            <label for="actif">Actif :</label>
+            <br/>
+            <h:selectBooleanCheckbox id="actif"
+                         value="#{typeRestaurantFaceBean.typeRestaurantFormBean.actif}"
+                         />
         </p>
         <p>
             <h:commandButton value="Sauvegarder" action="#{typeRestaurantFaceBean.save}" />

@@ -6,15 +6,17 @@ package com.bigcorp.booking.correction.jsf;
  */
 public class TypeRestaurantFormBean {
 
-    private String id;
+    private Integer id;
 
     private String nom;
 
-    public String getId() {
+    private Boolean actif;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -24,5 +26,13 @@ public class TypeRestaurantFormBean {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public Boolean getActif() {
+        return actif;
+    }
+
+    public void setActif(Boolean actif) {
+        this.actif = actif;
     }
 }
