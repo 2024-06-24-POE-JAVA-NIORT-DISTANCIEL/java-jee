@@ -1,0 +1,103 @@
+/* formulaire.css */
+
+/* Animation de fond */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Style général */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(-45deg, #40E0D0, #00CED1, #4682B4, #5F9EA0);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Conteneur du formulaire */
+.container {
+    background: white;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+}
+
+/* Titre */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+
+/* Styles pour la liste */
+ul#formList {
+    list-style-type: none;
+    padding: 0;
+}
+
+li.formItem {
+    margin-bottom: 1em;
+}
+
+/* Styles pour les labels */
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+/* Styles pour les champs de saisie */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+select {
+    width: calc(100% - 20px);
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+/* Style pour les cases à cocher */
+input[type="checkbox"] {
+    margin-right: 0.5em;
+}
+
+/* Style pour les boutons */
+button {
+    width: 100%;
+    padding: 0.75em;
+    background: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* Style pour les messages d'erreur */
+h\\:message {
+    color: red;
+    margin-top: -0.5em;
+    margin-bottom: 1em;
+    display: block;
+}

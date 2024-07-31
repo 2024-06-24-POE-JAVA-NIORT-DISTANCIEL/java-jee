@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+<h:head>
+    <title>Formulaire Client</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Page de formulaire d'inscription pour les clients."/>
+    <meta name="keywords" content="formulaire, inscription, client, enregistrement"/>
+    <meta name="author" content="Michael Descorcier"/>
+    <link rel="stylesheet" href="./css/formulaire.css"/>
+</h:head>
+<h:body>
+    <div class="container">
+        <h1>Inscription</h1>
+        <h:form method="post">
+            <h:panelGroup id="formGroup">
+                <ul id="formList">
+                    <li style="formItem">
+                        <h:outputLabel for="name" value="Nom:" />
+                        <h:inputText id="name" value="#{clientFormBean.name}" required="true" />
+                        <h:message for="name" style="color:red"/>
+                    </li>
+                    <li style="formItem">
+                        <h:outputLabel for="email" value="Email:" />
+                        <h:inputText id="email" value="#{clientFormBean.email}" required="true" />
+                        <h:message for="email" style="color:red"/>
+                    </li>
+                    <li style="formItem">
+                        <h:outputLabel for="phone" value="Téléphone:" />
+                        <h:inputText id="phone" value="#{clientFormBean.phone}" required="true" />
+                        <h:message for="phone" style="color:red"/>
+                    </li>
+                    <li style="formItem">
+                        <h:outputLabel for="address" value="Adresse:" />
+                        <h:inputText id="address" value="#{clientFormBean.address}" required="true" />
+                        <h:message for="address" style="color:red"/>
+                    </li>
+                    <li style="formItem">
+                        <h:outputLabel for="age" value="Âge:" />
+                        <h:inputText id="age" value="#{clientFormBean.age}" required="true">
+                            <f:passThroughAttribute name="type" value="number" />
+                            <f:passThroughAttribute name="min" value="1" />
+                            <f:passThroughAttribute name="max" value="120" />
+                        </h:inputText>
+                        <h:message for="age" style="color:red"/>
+                    </li>
+                    <li style="formItem">
+                        <h:outputLabel for="premium" value="Compte Premium:" />
+                        <h:selectBooleanCheckbox id="premium" value="#{clientFormBean.premium}" />
+                    </li>
+                    <li style="formItem">
+                        <h:inputHidden id="id" value="#{clientFormBean.id}" />
+                    </li>
+                    <li style="formItem">
+                        <h:commandButton value="Enregistrer" action="#{clientFaceBean.save}" />
+                    </li>
+                    <li style="formItem">
+                        <h:commandButton value="Annuler" immediate="true" action="home.xhtml?faces-redirect=true" />
+                    </li>
+
+                </ul>
+            </h:panelGroup>
+        </h:form>
+    </div>
+</h:body>
+</html>
+

@@ -1,0 +1,74 @@
+/* Définir des styles globaux */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    height: 100vh;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6; /* Améliorer la lisibilité */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('path/to/background-image.jpg'); /* Ajouter une image de fond si désiré */
+    background-size: cover;
+}
+
+/* Styles pour le conteneur du formulaire */
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajouter une ombre légère */
+    width: 100%;
+    max-width: 500px; /* Limiter la largeur maximale du formulaire */
+    display: flex;
+    flex-direction: column; /* Aligner les éléments verticalement */
+}
+
+/* Styles pour le panelGrid */
+h\:panelGrid {
+    display: flex;
+    flex-direction: column; /* Aligner les éléments verticalement dans panelGrid */
+}
+
+/* Styles pour le label et les champs de saisie */
+h\:outputLabel, h\:inputText {
+    margin-bottom: 15px; /* Espacement entre les éléments */
+}
+
+h\:inputText {
+    width: calc(100% - 22px); /* Ajuster la largeur pour tenir compte du padding et des bordures */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Inclure le padding et les bordures dans la largeur totale */
+    font-size: 1em; /* Taille de police standardisée */
+}
+
+/* Styles pour le bouton */
+.button-container {
+    display: flex;
+}
+
+.output-section{
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    display:none;
+}
+
+/* Styles pour le message affiché */
+h\:outputText {
+    margin-top: 20px;
+    font-size: 1.2em; /* Taille de police légèrement plus grande pour la lisibilité */
+    color: #333; /* Couleur de texte appropriée */
+}
+
+/* Styles pour les séparateurs */
+.separator {
+    margin: 20px 0;
+    border-top: 1px solid #ddd; /* Ligne de séparation fine et discrète */
+}

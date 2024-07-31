@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+<h:head>
+    <title>Liste des restaurants</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Page de listye de restaurants"/>
+    <meta name="keywords" content="affichier la liste des restaurants et le details de chaque restaurant"/>
+    <meta name="author" content="Michael Descorcier"/>
+    <link rel="stylesheet" href="./css/restaurant.css"/>
+</h:head>
+<h:body>
+    <h1>Liste des restaurants</h1>
+    <h:form styleClass = "liste-restaurant">
+        <!-- Liens pour sélectionner le restaurant -->
+        <h:outputLink value="restaurant.xhtml">
+            <f:param name="id" value="1" />
+            Le Gourmet
+        </h:outputLink>
+        <h:outputLink value="restaurant.xhtml">
+            <f:param name="id" value="2" />
+            La Dolce Vita
+        </h:outputLink>
+        <h:outputLink value="restaurant.xhtml">
+            <f:param name="id" value="3" />
+            Sakura
+        </h:outputLink>
+        <h:outputLink value="restaurant.xhtml">
+            <f:param name="id" value="4" />
+            El Toro
+        </h:outputLink>
+        <h:outputLink value="restaurant.xhtml">
+            <f:param name="id" value="5" />
+            The Curry House
+        </h:outputLink>
+        <h:outputLink value="restaurant.xhtml">
+            <f:param name="id" value="6" />
+            Osteria
+        </h:outputLink>
+        <h:outputLink value="restaurant.xhtml">
+            <f:param name="id" value="7" />
+            Won Ton
+        </h:outputLink>
+        <h:outputLink value="restaurant.xhtml">
+            <f:param name="id" value="8" />
+            Le Bistro
+        </h:outputLink>
+        <h:outputLink value="restaurant.xhtml">
+            <f:param name="id" value="9" />
+            Tacos Locos
+        </h:outputLink>
+        <h:outputLink value="restaurant.xhtml">
+            <f:param name="id" value="10" />
+            Le zouglou dans ta bouche
+        </h:outputLink>
+    </h:form>
+
+    <h:form>
+        <f:metadata>
+            <!-- Récupère le paramètre 'id' depuis l'URL -->
+            <f:viewParam name="id" value="#{restaurantBean.id}" />
+            <!-- Charge les données en fonction de l'ID fourni -->
+            <f:viewAction action="#{restaurantBean.loadData}" />
+        </f:metadata>
+
+        <h:panelGroup rendered="#{not empty restaurantBean.id}">
+            <h1>Détails du Restaurant</h1>
+            <p>ID du restaurant : #{restaurantBean.id}</p>
+            <p>Nom du restaurant : #{restaurantBean.name}</p>
+            <p>Description du restaurant : #{restaurantBean.description}</p>
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{empty restaurantBean.id}">
+            <p>Aucun ID de restaurant spécifié. Veuillez sélectionner un restaurant.</p>
+        </h:panelGroup>
+        <br/>
+        <h:commandLink value="Retour à l'accueil" action="home.xhtml?faces-redirect=true" />
+    </h:form>
+</h:body>
+</html>

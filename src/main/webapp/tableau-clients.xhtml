@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:pt="jakarta.faces.passthrough"
+      xmlns:cc="jakarta.faces.composite"
+      xmlns:my="jakarta.faces.component"
+      xmlns:fn="jakarta.tags.functions">
+
+<h:head>
+    <title>Tableau des Clients</title>
+</h:head>
+<h:body>
+    <div>Tableau des clients</div>
+    <h:dataTable value="#{clientFaceBean.client}" var="client" border="1" cellpadding="5">
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="ID"/>
+            </f:facet>
+            <h:outputText value="#{client.id}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Nom"/>
+            </f:facet>
+            <h:outputText value="#{client.name}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Email"/>
+            </f:facet>
+            <h:outputText value="#{client.email}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Téléphone"/>
+            </f:facet>
+            <h:outputText value="#{client.phone}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Adresse"/>
+            </f:facet>
+            <h:outputText value="#{client.address}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Âge"/>
+            </f:facet>
+            <h:outputText value="#{client.age}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Premium"/>
+            </f:facet>
+            <h:outputText value="#{client.premium ? 'Oui' : 'Non'}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Lien"/>
+            </f:facet>
+            <h:outputLink value="gestion-client.xhtml?id=#{client.id}">modifier</h:outputLink>
+        </h:column>
+    </h:dataTable>
+    <h:outputLink value="gestion-client.xhtml">Cliquer ici pour créer un nouveau client</h:outputLink>
+</h:body>
+</html>

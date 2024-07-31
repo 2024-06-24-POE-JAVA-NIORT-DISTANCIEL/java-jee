@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+<h:head>
+    <title>Confirmation d'Enregistrement</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Page de confirmation d'enregistrement pour les clients."/>
+    <meta name="keywords" content="enregistrement, confirmation, client, formulaire"/>
+    <meta name="author" content="Michael Descorcier"/>
+    <link rel="stylesheet" href="./css/confirmation.css"/>
+</h:head>
+<h:body>
+    <h1>Enregistrement effectué avec succès</h1>
+    <h:panelGrid columns="2">
+        <h:outputLabel value="Nom:" />
+        <h:outputText value="#{clientFormBean.name}" />
+
+        <h:outputLabel value="Email:" />
+        <h:outputText value="#{clientFormBean.email}" />
+
+        <h:outputLabel value="Téléphone:" />
+        <h:outputText value="#{clientFormBean.phone}" />
+
+        <h:outputLabel value="Adresse:" />
+        <h:outputText value="#{clientFormBean.address}" />
+
+        <h:outputLabel value="Âge:" />
+        <h:outputText value="#{clientFormBean.age}" />
+
+        <h:outputLabel value="Compte Premium:" />
+        <h:outputText value="#{clientFormBean.premium ? 'Oui' : 'Non'}" />
+    </h:panelGrid>
+</h:body>
+</html>

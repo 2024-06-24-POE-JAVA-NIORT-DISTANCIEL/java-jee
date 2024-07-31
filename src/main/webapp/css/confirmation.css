@@ -1,0 +1,50 @@
+/* confirmation.css */
+
+/* Style général */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(-45deg, #40E0D0, #00CED1, #4682B4, #5F9EA0);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+}
+
+/* Style pour la page de confirmation */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+
+h:panelGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+h:outputLabel {
+    font-weight: bold;
+}
+
+h:outputText {
+    padding-left: 0.5em;
+    font-size: 1em;
+    color: #555;
+}

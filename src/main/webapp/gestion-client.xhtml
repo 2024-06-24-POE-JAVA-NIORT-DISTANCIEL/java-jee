@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:pt="jakarta.faces.passthrough"
+      xmlns:cc="jakarta.faces.composite"
+      xmlns:my="jakarta.faces.component"
+      xmlns:fn="jakarta.tags.functions">
+
+<f:metadata>
+    <f:viewParam name="id" value="#{clientFaceBean.id}" />
+    <f:viewAction action="#{clientFaceBean.onLoad}" />
+</f:metadata>
+
+<h:head>
+    <title>Gestion des Clients</title>
+</h:head>
+<h:body>
+    <div>Gestion des clients</div>
+
+    <h:form prependId="false">
+        <h2>Client</h2>
+        <p>
+            <h:inputHidden id="id" value="#{clientFaceBean.clientFormBean.id}" />
+        </p>
+        <p>
+            <label for="nom">Nom :</label>
+            <br/>
+            <h:inputText id="nom" type="text"
+                         placeholder="Nom" value="#{clientFaceBean.clientFormBean.name}" />
+            <h:message for="nom" />
+        </p>
+        <p>
+            <label for="email">Email :</label>
+            <br/>
+            <h:inputText id="email" type="text"
+                         placeholder="Email" value="#{clientFaceBean.clientFormBean.email}" />
+            <h:message for="email" />
+        </p>
+        <p>
+            <label for="telephone">Téléphone :</label>
+            <br/>
+            <h:inputText id="telephone" type="text"
+                         placeholder="Téléphone" value="#{clientFaceBean.clientFormBean.phone}" />
+            <h:message for="telephone" />
+        </p>
+        <p>
+            <label for="adresse">Adresse :</label>
+            <br/>
+            <h:inputText id="adresse" type="text"
+                         placeholder="Adresse" value="#{clientFaceBean.clientFormBean.address}" />
+            <h:message for="adresse" />
+        </p>
+        <p>
+            <label for="age">Âge :</label>
+            <br/>
+            <h:inputText id="age" type="number"
+                         placeholder="Âge" value="#{clientFaceBean.clientFormBean.age}" />
+            <h:message for="age" />
+        </p>
+        <p>
+            <label for="premium">Premium :</label>
+            <br/>
+            <h:selectBooleanCheckbox id="premium"
+                                     value="#{clientFaceBean.clientFormBean.premium}" />
+            <h:message for="premium" />
+        </p>
+        <p>
+            <h:commandButton value="Sauvegarder" action="#{clientFaceBean.save}" />
+        </p>
+        <p>
+            <h:commandButton value="Annuler et revenir au tableau des clients" action="#{clientFaceBean.cancel}" immediate="true" />
+        </p>
+        <h:messages globalOnly="true" />
+    </h:form>
+</h:body>
+</html>
