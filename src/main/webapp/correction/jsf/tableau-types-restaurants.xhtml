@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:h="jakarta.faces.html"
+        xmlns:f="jakarta.faces.core"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:fn="jakarta.tags.functions">
+
+<h:head>
+</h:head>
+<h:body>
+    <div>Tableau des types de restaurant</div>
+    <h:dataTable var="typeRestaurant"
+                 value="#{typeRestaurantFaceBean.typesRestaurants}"
+                 border="1"
+                 cellpadding="5">
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Id"/>
+            </f:facet>
+            <h:outputText value="#{typeRestaurant.id}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Nom"/>
+            </f:facet>
+            <h:outputText value="#{typeRestaurant.nom}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Actif"/>
+            </f:facet>
+            <h:outputText value="#{typeRestaurant.actif?'Oui':'Non'}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Lien"/>
+            </f:facet>
+            <h:outputLink value="gestion-type-restaurant.jsf?id=#{typeRestaurant.id}" >Cliquer ici pour modifier</h:outputLink>
+        </h:column>
+    </h:dataTable>
+    <h:outputLink value="gestion-type-restaurant.jsf" >Cliquer ici pour créer un nouveau type de restaurant</h:outputLink>
+</h:body>
+</html>

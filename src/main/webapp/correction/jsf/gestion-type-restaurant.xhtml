@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:h="jakarta.faces.html"
+        xmlns:f="jakarta.faces.core"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:fn="jakarta.tags.functions">
+
+<!-- Actions qui ont lieu au chargement de la page : appel d'un setter et d'une méthode onLoad -->
+<f:metadata>
+    <f:viewParam name="id" value="#{typeRestaurantFaceBean.id}" />
+    <f:viewAction action="#{typeRestaurantFaceBean.onLoad}" />
+</f:metadata>
+
+<h:head>
+
+</h:head>
+<h:body>
+    <div>Gestion des types de restaurant</div>
+
+    <h:form prependId="false">
+        <h2>Type de restaurant</h2>
+        <p>
+            <label for="id">Id :</label>
+            <br/>
+            <h:inputText id="id" type="number"
+                         placeholder="id" value="#{typeRestaurantFaceBean.typeRestaurantFormBean.id}"
+                         validatorMessage="L'identifiant doit être positif." />
+            <h:message for="id" />
+        </p>
+        <p>
+            <label for="nom">Nom :</label>
+            <br/>
+            <h:inputText id="nom" type="text"
+                         placeholder="nom" value="#{typeRestaurantFaceBean.typeRestaurantFormBean.nom}"
+                         />
+            <h:message for="nom" />
+        </p>
+        <p>
+            <label for="actif">Actif :</label>
+            <br/>
+            <h:selectBooleanCheckbox id="actif"
+                         value="#{typeRestaurantFaceBean.typeRestaurantFormBean.actif}"
+                         />
+            <h:message for="actif" />
+        </p>
+        <p>
+            <h:commandButton value="Sauvegarder" action="#{typeRestaurantFaceBean.save}" />
+        </p>
+        <p>
+            <h:commandButton value="Annuler et revenir au tableau des restaurants" action="#{typeRestaurantFaceBean.cancel}" immediate="true" />
+        </p>
+        <!-- on pourrait mettre ici un composant h:messages pour afficher tous les messages de validation -->
+    </h:form>
+
+</h:body>
+</html>
