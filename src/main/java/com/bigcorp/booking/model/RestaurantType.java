@@ -33,3 +33,5 @@ public class RestaurantType {
 		this.name = name;
 	}
 }
+
+
