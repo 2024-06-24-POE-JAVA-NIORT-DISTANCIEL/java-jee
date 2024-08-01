@@ -24,63 +24,31 @@ public class Client {
 
     // Getters et Setters
 
-    public Integer getId() {
-        return id;
-    }
+    public Integer getId() {return id;}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public void setId(Integer id) {this.id = id;}
 
-    public String getName() {
-        return name;
-    }
+    public String getName() {return name;}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) {this.name = name;}
 
-    public String getEmail() {
-        return email;
-    }
+    public String getEmail() {return email;}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void setEmail(String email) {this.email = email;}
 
-    public String getPhone() {
-        return phone;
-    }
+    public String getPhone() {return phone;}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+    public void setPhone(String phone) {this.phone = phone;}
 
-    public String getAddress() {
-        return address;
-    }
+    public String getAddress() {return address;}
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+    public void setAddress(String address) {this.address = address;}
 
-    public int getAge() {
-        return age;
-    }
+    public int getAge() {return age;}
 
-    public void setAge(int age) {
-        this.age = age;
-    }
+    public void setAge(int age) {this.age = age;}
 
-    public boolean isPremium() {
-        return premium;
-    }
+    public boolean isPremium() {return premium;}
 
-    public void setPremium(boolean premium) {
-        this.premium = premium;
-    }
+    public void setPremium(boolean premium) {this.premium = premium;}
 }
-
-
-
-
