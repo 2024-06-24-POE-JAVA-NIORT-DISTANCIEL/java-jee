@@ -24,8 +24,10 @@ public class Restaurant {
      */
     private String nom;
 
-
     private String adresse;
+
+    @Enumerated(EnumType.STRING)
+    private Prix prix;
 
     /**
      * Ici, on surcharge le comportement par défaut en indiquant
@@ -34,6 +36,8 @@ public class Restaurant {
      */
     @Column(name = "ADRESSE_SPECIALE")
     private String adresseDuPatron;
+
+    private Boolean actif;
 
     public Integer getId() {
         return id;
@@ -51,12 +55,28 @@ public class Restaurant {
         this.nom = nom;
     }
 
+    public Boolean getActif() {
+        return actif;
+    }
+
+    public void setActif(Boolean actif) {
+        this.actif = actif;
+    }
+
     public String getAdresse() {
         return adresse;
     }
 
     public void setAdresse(String adresse) {
         this.adresse = adresse;
+    }
+
+    public Prix getPrix() {
+        return prix;
+    }
+
+    public void setPrix(Prix prix) {
+        this.prix = prix;
     }
 
     public String getAdresseDuPatron() {
