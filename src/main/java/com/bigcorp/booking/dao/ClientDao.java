@@ -2,7 +2,10 @@ package com.bigcorp.booking.dao;
 
 import java.util.List;
 import com.bigcorp.booking.model.Client;
+import com.bigcorp.booking.rest.JaxRsActivator;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.ejb.Stateless;
+import jakarta.ejb.TransactionAttribute;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -62,9 +65,11 @@ public class ClientDao {
      */
     @Transactional
     public void deleteById(Integer id) {
-        Client entity = entityManager.find(Client.class, id);
-        if (entity != null) {
-            entityManager.remove(entity);
+        Client client = entityManager.find(Client.class, id);
+        if (client != null) {
+            entityManager.remove(client);
+            return;
         }
+        entityManager.remove(client);
     }
 }
