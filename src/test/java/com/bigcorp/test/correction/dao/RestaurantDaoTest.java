@@ -62,5 +62,22 @@ public class RestaurantDaoTest {
 		Assertions.assertEquals("La taverne du général Machin", restaurantCharge.getNom());
 	}
 
+	@Test
+	public void testDelete(){
+		//Création du restaurant
+		Restaurant restaurant = new Restaurant();
+		restaurant.setNom("La taverne du général Machin");
+
+		//Sauvegarde du restaurant
+		Restaurant restaurantSauvegarde = restaurantDao.save(restaurant);
+		Restaurant restaurantEnBase = restaurantDao.findRestaurantById(restaurantSauvegarde.getId());
+		Assertions.assertNotNull(restaurantEnBase);
+
+		//Suppression du restaurant
+		restaurantDao.delete(restaurantSauvegarde.getId());
+
+		restaurantEnBase = restaurantDao.findRestaurantById(restaurantSauvegarde.getId());
+		Assertions.assertNull(restaurantEnBase);
+	}
 
 }

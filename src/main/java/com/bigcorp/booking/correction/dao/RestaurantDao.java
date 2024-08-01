@@ -43,4 +43,18 @@ public class RestaurantDao {
         return entityManager.merge(restaurant);
     }
 
+    /**
+     * Supprime un restaurant par son id.
+     * Ne fait rien si le restaurant n'existe pas en base
+     * @param id
+     */
+    @TransactionAttribute
+    public void delete(Integer id){
+        Restaurant restaurant = entityManager.find(Restaurant.class, id);
+        if(restaurant == null){
+            return;
+        }
+        entityManager.remove(restaurant);
+    }
+
 }
