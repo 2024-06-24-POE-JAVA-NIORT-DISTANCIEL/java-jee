@@ -35,6 +35,8 @@ public class Restaurant {
     @Column(name = "ADRESSE_SPECIALE")
     private String adresseDuPatron;
 
+    private Boolean actif;
+
     public Integer getId() {
         return id;
     }
@@ -49,6 +51,14 @@ public class Restaurant {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public Boolean getActif() {
+        return actif;
+    }
+
+    public void setActif(Boolean actif) {
+        this.actif = actif;
     }
 
     public String getAdresse() {

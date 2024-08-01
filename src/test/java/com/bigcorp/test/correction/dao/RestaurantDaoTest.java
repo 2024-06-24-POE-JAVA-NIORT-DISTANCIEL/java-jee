@@ -40,10 +40,26 @@ public class RestaurantDaoTest {
 	private RestaurantDao restaurantDao;
 
 	@Test
-	public void testDao1() {
-		Restaurant restaurant =  restaurantDao.findRestaurantById(1);
-		Assertions.assertNull(restaurant);
+	public void testSaveAndGet(){
+		//Création du restaurant
+		Restaurant restaurant = new Restaurant();
+		restaurant.setAdresse("13 rue du général Machin");
+		restaurant.setNom("La taverne du général Machin");
+		//restaurant.setAdresseDuPatron("15 avenue des lilas");
 
+		//Sauvegarde du restaurant
+		Restaurant restaurantSauvegarde = restaurantDao.save(restaurant);
+
+		//Validations de la sauvegarde
+		Assertions.assertNotNull(restaurantSauvegarde);
+		Assertions.assertNotNull(restaurantSauvegarde.getId());
+		System.out.println("L'identifiant du restaurant sauvegardé " + restaurantSauvegarde.getId());
+
+		//Récupération du restaurant de la base de données avec le même identifiant
+		Restaurant restaurantCharge = restaurantDao.findRestaurantById(restaurantSauvegarde.getId());
+
+		Assertions.assertEquals("13 rue du général Machin", restaurantCharge.getAdresse());
+		Assertions.assertEquals("La taverne du général Machin", restaurantCharge.getNom());
 	}
 
 

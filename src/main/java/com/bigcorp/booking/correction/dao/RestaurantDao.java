@@ -1,7 +1,9 @@
 package com.bigcorp.booking.correction.dao;
 
 import com.bigcorp.booking.correction.model.Restaurant;
+import com.bigcorp.booking.rest.JaxRsActivator;
 import jakarta.ejb.Stateless;
+import jakarta.ejb.TransactionAttribute;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
@@ -29,6 +31,16 @@ public class RestaurantDao {
      */
     public Restaurant findRestaurantById(Integer id){
        return  entityManager.find(Restaurant.class, id );
+    }
+
+    /**
+     * Sauvegarde un restaurant
+     * @param restaurant
+     * @return le restaurant sauvegardé
+     */
+    @TransactionAttribute
+    public Restaurant save(Restaurant restaurant){
+        return entityManager.merge(restaurant);
     }
 
 }
