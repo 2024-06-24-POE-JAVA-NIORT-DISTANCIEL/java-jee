@@ -26,7 +26,7 @@ public class RestaurantDaoTest {
 	 */
 	@Deployment
 	public static WebArchive createTestArchive() {
-		return ShrinkWrap.create(WebArchive.class, "RestaurantTypeServiceIT.war")
+		return ShrinkWrap.create(WebArchive.class, "it.war")
 				.addPackages(true, "com.bigcorp.booking")
 				.addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
