@@ -1,6 +1,7 @@
 package com.bigcorp.test.correction.dao;
 
 import com.bigcorp.booking.correction.dao.RestaurantDao;
+import com.bigcorp.booking.correction.model.Prix;
 import com.bigcorp.booking.correction.model.Restaurant;
 import com.bigcorp.booking.model.RestaurantType;
 import com.bigcorp.booking.service.RestaurantTypeService;
@@ -13,6 +14,8 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
+import java.util.List;
 
 /**
  * Teste le DAO. Utilise une base en mémoire
@@ -45,6 +48,7 @@ public class RestaurantDaoTest {
 		Restaurant restaurant = new Restaurant();
 		restaurant.setAdresse("13 rue du général Machin");
 		restaurant.setNom("La taverne du général Machin");
+		restaurant.setPrix(Prix.MOYEN);
 		//restaurant.setAdresseDuPatron("15 avenue des lilas");
 
 		//Sauvegarde du restaurant
@@ -58,8 +62,44 @@ public class RestaurantDaoTest {
 		//Récupération du restaurant de la base de données avec le même identifiant
 		Restaurant restaurantCharge = restaurantDao.findRestaurantById(restaurantSauvegarde.getId());
 
-		Assertions.assertEquals("13 rue du général Machin", restaurantCharge.getAdresse());
+		Assertions.assertNotNull(restaurantCharge);
+		Assertions.assertEquals(restaurant.getAdresse(), restaurantCharge.getAdresse());
 		Assertions.assertEquals("La taverne du général Machin", restaurantCharge.getNom());
+		Assertions.assertEquals(restaurant.getPrix(), restaurantCharge.getPrix());
+	}
+
+	@Test
+	public void testSaveAndFindByNom(){
+		//ARRANGE
+		//Création du restaurant
+		Restaurant restaurant = new Restaurant();
+		restaurant.setNom("La bonne auberge");
+		Restaurant restaurantSauvegarde = restaurantDao.save(restaurant);
+
+		//ACT
+		//Récupération du restaurant de la base de données avec le bon nom
+		List<Restaurant> resultat = restaurantDao.findByNom(restaurant.getNom());
+
+		//ASSERT
+		Assertions.assertEquals(1, resultat.size());
+		Restaurant restaurantCharge = resultat.get(0);
+		Assertions.assertEquals(restaurant.getNom(), restaurantCharge.getNom());
+	}
+
+	@Test
+	public void testSaveAndFindByNomLike(){
+		//Création du restaurant
+		Restaurant restaurant = new Restaurant();
+		restaurant.setNom("La table de Monsieur Malinou");
+		Restaurant restaurantSauvegarde = restaurantDao.save(restaurant);
+
+		//Récupération du restaurant de la base de données avec le même identifiant
+		List<Restaurant> resultat = restaurantDao.findByNomLike("malinou");
+
+		Assertions.assertEquals(1, resultat.size());
+		Restaurant restaurantCharge = resultat.get(0);
+
+		Assertions.assertEquals(restaurant.getNom(), restaurantCharge.getNom());
 	}
 
 	@Test

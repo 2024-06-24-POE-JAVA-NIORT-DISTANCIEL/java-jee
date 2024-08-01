@@ -24,8 +24,10 @@ public class Restaurant {
      */
     private String nom;
 
-
     private String adresse;
+
+    @Enumerated(EnumType.STRING)
+    private Prix prix;
 
     /**
      * Ici, on surcharge le comportement par défaut en indiquant
@@ -67,6 +69,14 @@ public class Restaurant {
 
     public void setAdresse(String adresse) {
         this.adresse = adresse;
+    }
+
+    public Prix getPrix() {
+        return prix;
+    }
+
+    public void setPrix(Prix prix) {
+        this.prix = prix;
     }
 
     public String getAdresseDuPatron() {
