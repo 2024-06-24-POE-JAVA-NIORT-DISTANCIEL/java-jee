@@ -160,8 +160,9 @@ public class RestaurantDaoTest {
 		//Assertion qu'une ligne a été insérée
 		Restaurant restaurantCharge = restaurantDao.findRestaurantWithRestaurantTypeById(restaurantSauvegarde.getId());
 		Assertions.assertNotNull(restaurantCharge);
-
 		Assertions.assertNotNull(restaurantCharge.getRestaurantType().getName());
+
+		
 
 	}
 

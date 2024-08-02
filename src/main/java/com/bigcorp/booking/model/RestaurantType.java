@@ -1,10 +1,12 @@
 package com.bigcorp.booking.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.bigcorp.booking.correction.model.Restaurant;
+import jakarta.persistence.*;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Entité : décrit des données persistées dans une classe (un POJO)
  */
@@ -16,6 +18,15 @@ public class RestaurantType {
 	private Long id;
 	
 	private String name;
+
+	/**
+	 * Cette relation OneToMany est l'inverse
+	 * de la relation restaurantType de l'entité Restaurant.
+	 * Elle est configurée côté Restaurant (voir Restaurant.restaurantType).
+	 * Modifier cette collection et persister RestaurantType NE sauvegardera PAS la relation.
+	 */
+	@OneToMany(mappedBy = "restaurantType")
+	private Set<Restaurant> restaurants = new HashSet<>();
 	
 	public Long getId() {
 		return id;
@@ -31,5 +42,13 @@ public class RestaurantType {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Set<Restaurant> getRestaurants() {
+		return restaurants;
+	}
+
+	public void setRestaurants(Set<Restaurant> restaurants) {
+		this.restaurants = restaurants;
 	}
 }
