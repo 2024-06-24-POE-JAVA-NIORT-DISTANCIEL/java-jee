@@ -3,6 +3,7 @@ package com.bigcorp.test.correction.dao;
 import com.bigcorp.booking.correction.dao.RestaurantDao;
 import com.bigcorp.booking.correction.model.Prix;
 import com.bigcorp.booking.correction.model.Restaurant;
+import com.bigcorp.booking.dao.RestaurantTypeDao;
 import com.bigcorp.booking.model.RestaurantType;
 import com.bigcorp.booking.service.RestaurantTypeService;
 import jakarta.inject.Inject;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -41,6 +43,8 @@ public class RestaurantDaoTest {
 	 */
 	@Inject
 	private RestaurantDao restaurantDao;
+	@Inject
+	private RestaurantTypeDao restaurantTypeDao;
 
 	@Test
 	public void testSaveAndGet(){
@@ -49,6 +53,7 @@ public class RestaurantDaoTest {
 		restaurant.setAdresse("13 rue du général Machin");
 		restaurant.setNom("La taverne du général Machin");
 		restaurant.setPrix(Prix.MOYEN);
+		restaurant.setOuverture(LocalDateTime.of(2023,12,12,6,10,0));
 		//restaurant.setAdresseDuPatron("15 avenue des lilas");
 
 		//Sauvegarde du restaurant
@@ -66,6 +71,7 @@ public class RestaurantDaoTest {
 		Assertions.assertEquals(restaurant.getAdresse(), restaurantCharge.getAdresse());
 		Assertions.assertEquals("La taverne du général Machin", restaurantCharge.getNom());
 		Assertions.assertEquals(restaurant.getPrix(), restaurantCharge.getPrix());
+
 	}
 
 	@Test
@@ -118,6 +124,45 @@ public class RestaurantDaoTest {
 
 		restaurantEnBase = restaurantDao.findRestaurantById(restaurantSauvegarde.getId());
 		Assertions.assertNull(restaurantEnBase);
+	}
+
+	@Test
+	public void testDeleteWithJpql(){
+		//Création du restaurant
+		Restaurant restaurant = new Restaurant();
+		restaurant.setNom("La taverne du général Machin");
+
+		//Sauvegarde du restaurant
+		Restaurant restaurantSauvegarde = restaurantDao.save(restaurant);
+
+		//Suppression du restaurant
+		restaurantDao.deleteByIdWithJpql(restaurantSauvegarde.getId());
+
+		Restaurant restaurantEnBase = restaurantDao.findRestaurantById(restaurantSauvegarde.getId());
+		Assertions.assertNull(restaurantEnBase);
+	}
+
+	@Test
+	public void testSaveWithRestaurantType(){
+		//Création du restaurantType
+		RestaurantType restaurantType = new RestaurantType();
+		restaurantType.setName("Taverne suisse");
+		RestaurantType restaurantTypeSauvegarde = restaurantTypeDao.save(restaurantType);
+
+		//Création du restaurant
+		Restaurant restaurant = new Restaurant();
+		restaurant.setNom("La table des Alpes");
+		restaurant.setRestaurantType(restaurantTypeSauvegarde);
+
+		//Sauvegarde du restaurant
+		Restaurant restaurantSauvegarde = restaurantDao.save(restaurant);
+
+		//Assertion qu'une ligne a été insérée
+		Restaurant restaurantCharge = restaurantDao.findRestaurantWithRestaurantTypeById(restaurantSauvegarde.getId());
+		Assertions.assertNotNull(restaurantCharge);
+
+		Assertions.assertNotNull(restaurantCharge.getRestaurantType().getName());
+
 	}
 
 }
