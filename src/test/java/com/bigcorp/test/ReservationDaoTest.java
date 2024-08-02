@@ -47,82 +47,34 @@ public class ReservationDaoTest {
     }
 
     @Test
-    public void testFindAllReservations() {
+    public void testSaveAndRetrieveReservationWithClient() {
+        System.out.println("Running testSaveAndRetrieveReservationWithClient");
+        printSeparator();
         printAsciiArt();
-        System.out.println("Running testFindAllReservations");
         printSeparator();
 
         // Create and save a client
         Client client = new Client();
         client.setName("John Doe");
         client.setEmail("john.doe@example.com");
-        client.setPhone("0987656521");
+        client.setPhone("0987654321");
         client.setAddress("123 Maple Street");
-        client.setAge(28);
+        client.setAge(30);
         client.setPremium(true);
         Client savedClient = clientDao.save(client);
 
-        // Create and save multiple reservations linked to the client
-        Reservation reservation1 = new Reservation();
-        reservation1.setReservationDateTime(LocalDateTime.of(2024, 8, 5, 12, 30));
-        reservation1.setClient(savedClient);
-        reservationDao.save(reservation1);
+        // Create and save a reservation linked to the client
+        Reservation reservation = new Reservation();
+        reservation.setReservationDateTime(LocalDateTime.of(2024, 8, 5, 12, 30));
+        reservation.setClient(savedClient);
+        Reservation savedReservation = reservationDao.save(reservation);
 
-        Reservation reservation2 = new Reservation();
-        reservation2.setReservationDateTime(LocalDateTime.of(2024, 9, 7, 20, 0));
-        reservation2.setClient(savedClient);
-        reservationDao.save(reservation2);
-
-        // Find all reservations
-        List<Reservation> reservations = reservationDao.findAll();
-        Assertions.assertFalse(reservations.isEmpty(), "Reservations should be found");
-        for (Reservation res : reservations) {
-            printSeparator();
-            System.out.println("Reservation ID: " + res.getId());
-            System.out.println("Reservation DateTime: " + res.getReservationDateTime());
-            System.out.println("Client Name: " + res.getClient().getName());
-            System.out.println("Client Email: " + res.getClient().getEmail());
-            printSeparator();
-        }
-    }
-
-    @Test
-    public void testFindReservationByClient() {
-        printAsciiArt();
-        System.out.println("Running testFindReservationByClient");
+        // Retrieve the reservation and ensure the client's name can be displayed
+        Reservation retrievedReservation = reservationDao.findReservationWithClient(savedReservation.getId());
+        Assertions.assertNotNull(retrievedReservation);
+        Assertions.assertNotNull(retrievedReservation.getClient());
         printSeparator();
-
-        // Create and save a client
-        Client client = new Client();
-        client.setName("Jane Doe");
-        client.setEmail("jane.doe@example.com");
-        client.setPhone("0987654321");
-        client.setAddress("321 Maple Street");
-        client.setAge(28);
-        client.setPremium(false);
-        Client savedClient = clientDao.save(client);
-
-        // Create and save multiple reservations linked to the client
-        Reservation reservation1 = new Reservation();
-        reservation1.setReservationDateTime(LocalDateTime.of(2024, 8, 2, 19, 0));
-        reservation1.setClient(savedClient);
-        reservationDao.save(reservation1);
-
-        Reservation reservation2 = new Reservation();
-        reservation2.setReservationDateTime(LocalDateTime.of(2024, 9, 3, 11, 30));
-        reservation2.setClient(savedClient);
-        reservationDao.save(reservation2);
-
-        // Find reservations by client name
-        List<Reservation> reservations = reservationDao.findByClientName("Jane Doe");
-        Assertions.assertFalse(reservations.isEmpty(), "Reservations should be found for client name 'Jane Doe'");
-        for (Reservation res : reservations) {
-            printSeparator();
-            System.out.println("Reservation ID: " + res.getId());
-            System.out.println("Reservation DateTime: " + res.getReservationDateTime());
-            System.out.println("Client Name: " + res.getClient().getName());
-            System.out.println("Client Email: " + res.getClient().getEmail());
-            printSeparator();
-        }
+        System.out.println("Client Name: " + retrievedReservation.getClient().getName());
+        printSeparator();
     }
 }

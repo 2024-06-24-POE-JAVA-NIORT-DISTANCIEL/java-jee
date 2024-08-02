@@ -6,7 +6,6 @@ import jakarta.ejb.TransactionAttribute;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-import jakarta.persistence.NoResultException;
 import java.util.List;
 
 @Stateless
@@ -17,26 +16,17 @@ public class ReservationDao {
 
     @TransactionAttribute
     public Reservation findById(Integer id) {
-        try {
-            return entityManager.find(Reservation.class, id);
-        } catch (NoResultException e) {
-            return null;
-        }
+        return entityManager.find(Reservation.class, id);
     }
 
     public List<Reservation> findAll() {
-        return entityManager.createQuery("SELECT r FROM Reservation r", Reservation.class)
-                .getResultList();
+        TypedQuery<Reservation> query = entityManager.createQuery("SELECT r FROM Reservation r", Reservation.class);
+        return query.getResultList();
     }
 
     @TransactionAttribute
     public Reservation save(Reservation reservation) {
-        if (reservation.getId() == null) {
-            entityManager.persist(reservation);
-            return reservation;
-        } else {
-            return entityManager.merge(reservation);
-        }
+        return entityManager.merge(reservation);
     }
 
     @TransactionAttribute
@@ -52,5 +42,13 @@ public class ReservationDao {
                 "SELECT r FROM Reservation r WHERE r.client.name = :clientName", Reservation.class);
         query.setParameter("clientName", clientName);
         return query.getResultList();
+    }
+
+    public Reservation findReservationWithClient(Integer id) {
+        TypedQuery<Reservation> query = entityManager.createQuery(
+                "SELECT r FROM Reservation r INNER JOIN FETCH r.client " +
+                        "WHERE r.id = :id", Reservation.class);
+        query.setParameter("id", id);
+        return query.getSingleResult();
     }
 }
