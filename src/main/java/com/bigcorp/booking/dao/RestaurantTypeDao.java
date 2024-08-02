@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.bigcorp.booking.model.RestaurantType;
 
+import jakarta.ejb.Stateless;
+import jakarta.ejb.TransactionAttribute;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -14,7 +16,7 @@ import jakarta.persistence.TypedQuery;
 /**
  * DAO s'appuyant sur un entityManager JPA
  */
-@ApplicationScoped
+@Stateless
 public class RestaurantTypeDao {
 
 	@PersistenceContext
@@ -49,10 +51,12 @@ public class RestaurantTypeDao {
 		return query.getResultList();
 	}
 
+	@TransactionAttribute
 	public RestaurantType save(RestaurantType restaurantType) {
 		return entityManager.merge(restaurantType);
 	}
 
+	@TransactionAttribute
 	public void deleteById(Long id) {
 		RestaurantType entity = entityManager.find(RestaurantType.class, id);
 		if(entity == null) {

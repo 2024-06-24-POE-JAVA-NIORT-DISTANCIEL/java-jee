@@ -5,6 +5,7 @@ import jakarta.ejb.Stateless;
 import jakarta.ejb.TransactionAttribute;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
@@ -83,9 +84,41 @@ public class RestaurantDao {
      */
     public List<Restaurant> findByNomLike(String nom) {
         TypedQuery<Restaurant> query = entityManager.createQuery(
-                "select r from Restaurant r where upper(r.nom) like upper(:nom) ", Restaurant.class);
+                "select r from Restaurant r where upper(r.nom) like upper(:nom)", Restaurant.class);
         query.setParameter("nom", "%" + nom + "%");
         return query.getResultList();
     }
 
+
+    public int deleteByIdWithJpql(Integer id) {
+        Query query = entityManager.createQuery(
+                "delete Restaurant r where r.id = :id ");
+        query.setParameter("id", id);
+        return query.executeUpdate();
+    }
+
+
+    public int deleteByNomWithJpql(String nom) {
+        Query query = entityManager.createQuery("""
+                        delete Restaurant r 
+                            where r.nom = :nom 
+                         """);
+        query.setParameter("nom", nom);
+        return query.executeUpdate();
+    }
+
+    public Restaurant findRestaurantWithRestaurantTypeById(Integer id) {
+        TypedQuery<Restaurant> query = entityManager.createQuery(
+                """
+                        select r
+                        from Restaurant r
+                        left join fetch r.restaurantType
+                        where r.id = :id""", Restaurant.class);
+        query.setParameter("id", id);
+        List<Restaurant> result = query.getResultList();
+        if(result.isEmpty()){
+            return null;
+        }
+        return result.get(0);
+    }
 }

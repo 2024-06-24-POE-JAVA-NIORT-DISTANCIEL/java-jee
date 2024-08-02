@@ -1,6 +1,9 @@
 package com.bigcorp.booking.correction.model;
 
+import com.bigcorp.booking.model.RestaurantType;
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 
 /**
  * Entité : classe annotée avec @Entity
@@ -17,6 +20,9 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="RESTAURANT_TYPE_ID")
+    private RestaurantType restaurantType;
 
     /**
      * Les autres attributs sont automatiquement persistés dans une colonne
@@ -28,6 +34,8 @@ public class Restaurant {
 
     @Enumerated(EnumType.STRING)
     private Prix prix;
+
+    private LocalDateTime ouverture;
 
     /**
      * Ici, on surcharge le comportement par défaut en indiquant
@@ -85,5 +93,21 @@ public class Restaurant {
 
     public void setAdresseDuPatron(String adresseDuPatron) {
         this.adresseDuPatron = adresseDuPatron;
+    }
+
+    public RestaurantType getRestaurantType() {
+        return restaurantType;
+    }
+
+    public void setRestaurantType(RestaurantType restaurantType) {
+        this.restaurantType = restaurantType;
+    }
+
+    public LocalDateTime getOuverture() {
+        return ouverture;
+    }
+
+    public void setOuverture(LocalDateTime ouverture) {
+        this.ouverture = ouverture;
     }
 }
