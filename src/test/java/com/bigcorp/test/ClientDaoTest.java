@@ -1,5 +1,6 @@
-package com.bigcorp.test.dao;
+package com.bigcorp.test;
 
+import com.bigcorp.booking.correction.model.Restaurant;
 import com.bigcorp.booking.dao.ClientDao;
 import com.bigcorp.booking.model.Client;
 import jakarta.inject.Inject;
@@ -38,6 +39,7 @@ public class ClientDaoTest {
      */
     @Inject
     private ClientDao clientDao;
+
 
     private void printClientInfo(String action, Client client) {
         System.out.println(action + " - Client Info: ");
@@ -95,6 +97,40 @@ public class ClientDaoTest {
         printClientInfo("Found by ID", foundClient);
         Assertions.assertNotNull(foundClient, "Client should be found by ID, but was null");
         Assertions.assertEquals("John Doe", foundClient.getName(), "Expected name: John Doe, but found: " + foundClient.getName());
+    }
+
+    @Test
+    public void testSaveAndFindByName(){
+        //ARRANGE
+        //Création du client
+        Client client = new Client();
+        client.setName("Marc");
+        Client clientSauvegarde = clientDao.save(client);
+
+        //ACT
+        //Récupération du client de la base de données avec le bon nom
+        List<Client> resultat = clientDao.findByName(client.getName());
+
+        //ASSERT
+        Assertions.assertEquals(1, resultat.size());
+        Client clientCharge = resultat.get(0);
+        Assertions.assertEquals(client.getName(), clientCharge.getName());
+    }
+
+    @Test
+    public void testSaveAndFindByNameLike(){
+        // Create the client
+        Client client = new Client();
+        client.setName("malinou");
+        Client savedClient = clientDao.save(client);
+
+        // Retrieve the client from the database with a similar name
+        List<Client> result = clientDao.findByNameLike("no");
+
+        // Assertions
+        Assertions.assertFalse(result.isEmpty(), "Expected at least one client, but found none");
+        Client loadedClient = result.get(0);
+        Assertions.assertEquals(client.getName(), loadedClient.getName(), "Expected name: " + client.getName() + ", but found: " + loadedClient.getName());
     }
 
     @Test
@@ -157,10 +193,6 @@ public class ClientDaoTest {
         clientDao.deleteById(savedClient.getId());
         baseClient = clientDao.findById(savedClient.getId());
         Assertions.assertNull(baseClient, "Client should not be found after deletion, but was found");
-        if(baseClient != null) {
-            printClientInfo("Deleted", baseClient);
-        } else {
-            System.out.println("Deleted - Client not found");
-        }
+        System.out.println("Deleted - Client not found");
     }
 }
