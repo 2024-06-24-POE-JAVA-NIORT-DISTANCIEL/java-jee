@@ -90,23 +90,25 @@ public class RestaurantDao {
     }
 
 
+    /**
+     * Suppression par id avec JPQL
+     * @param id
+     * @return le nombre de lignes supprimées
+     */
+    @TransactionAttribute
     public int deleteByIdWithJpql(Integer id) {
         Query query = entityManager.createQuery(
-                "delete Restaurant r where r.id = :id ");
+                "delete from Restaurant r where r.id = :id ");
         query.setParameter("id", id);
         return query.executeUpdate();
     }
 
-
-    public int deleteByNomWithJpql(String nom) {
-        Query query = entityManager.createQuery("""
-                        delete Restaurant r 
-                            where r.nom = :nom 
-                         """);
-        query.setParameter("nom", nom);
-        return query.executeUpdate();
-    }
-
+    /**
+     * Récupère un Restaurant par son identifiant.
+     * Ramène aussi le restaurantType associé s'il existe.
+     * @param id
+     * @return un Restaurant, ou null si l'id ne correspond à aucune ligne en base de données.
+     */
     public Restaurant findRestaurantWithRestaurantTypeById(Integer id) {
         TypedQuery<Restaurant> query = entityManager.createQuery(
                 """
