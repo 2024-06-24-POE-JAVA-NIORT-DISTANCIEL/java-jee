@@ -69,6 +69,5 @@ public class RestaurantTypeRestController {
     public RestaurantType save(RestaurantType restaurantType) {
         return this.restaurantTypeService.save(restaurantType);
     }
-
   
 }

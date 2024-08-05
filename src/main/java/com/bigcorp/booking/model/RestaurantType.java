@@ -25,8 +25,8 @@ public class RestaurantType {
 	 * Elle est configurée côté Restaurant (voir Restaurant.restaurantType).
 	 * Modifier cette collection et persister RestaurantType NE sauvegardera PAS la relation.
 	 */
-	@OneToMany(mappedBy = "restaurantType")
-	private Set<Restaurant> restaurants = new HashSet<>();
+	//@OneToMany(mappedBy = "restaurantType")
+	//private Set<Restaurant> restaurants = new HashSet<>();
 	
 	public Long getId() {
 		return id;
@@ -44,11 +44,11 @@ public class RestaurantType {
 		this.name = name;
 	}
 
-	public Set<Restaurant> getRestaurants() {
-		return restaurants;
-	}
-
-	public void setRestaurants(Set<Restaurant> restaurants) {
-		this.restaurants = restaurants;
-	}
+//	public Set<Restaurant> getRestaurants() {
+//		return restaurants;
+//	}
+//
+//	public void setRestaurants(Set<Restaurant> restaurants) {
+//		this.restaurants = restaurants;
+//	}
 }
