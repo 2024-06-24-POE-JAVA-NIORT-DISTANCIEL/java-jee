@@ -37,6 +37,17 @@ public class RestaurantTypeService {
 		return this.restaurantTypeDao.save(restaurantType);
 	}
 
+//	@TransactionAttribute
+//	public RestaurantType update(RestaurantType restaurantType) {
+//		LOGGER.info("Mise à jour de : " + restaurantType);
+//		// Vérifiez si l'entité existe avant de mettre à jour
+//		RestaurantType existing = this.restaurantTypeDao.findById(restaurantType.getId());
+//		if (existing == null) {
+//			throw new IllegalArgumentException("RestaurantType not found for ID: " + restaurantType.getId());
+//		}
+//		return this.restaurantTypeDao.update(restaurantType);
+//	}
+
 	public List<RestaurantType> findLikeName(String restaurantTypeFilter) {
 		return this.restaurantTypeDao.findLikeName(restaurantTypeFilter);
 	}

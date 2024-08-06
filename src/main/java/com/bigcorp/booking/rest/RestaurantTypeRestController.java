@@ -1,6 +1,5 @@
 package com.bigcorp.booking.rest;
 
-
 import java.util.List;
 
 import com.bigcorp.booking.model.RestaurantType;
@@ -8,13 +7,7 @@ import com.bigcorp.booking.service.RestaurantTypeService;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
 /**
@@ -25,13 +18,13 @@ import jakarta.ws.rs.core.MediaType;
 @RequestScoped
 public class RestaurantTypeRestController {
 
-	@Inject
-	private RestaurantTypeService restaurantTypeService;
-	
-	/**
-	 * Traite les requêtes GET /
-	 * @return
-	 */
+    @Inject
+    private RestaurantTypeService restaurantTypeService;
+
+    /**
+     * Traite les requêtes GET /
+     * @return
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<RestaurantType> listAll() {
@@ -39,9 +32,9 @@ public class RestaurantTypeRestController {
     }
 
     /**
-	 * Traite les requêtes GET /{id}
-	 * @return
-	 */
+     * Traite les requêtes GET /{id}
+     * @return
+     */
     @GET
     @Path("/{id:[0-9][0-9]*}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -50,24 +43,41 @@ public class RestaurantTypeRestController {
     }
 
     /**
-   	 * Traite les requêtes DELETE /{id}
-   	 * @return
-   	 */
+     * Traite les requêtes DELETE /{id}
+     * @return
+     */
     @DELETE
     @Path("/{id:[0-9][0-9]*}")
     public void deleteById(@PathParam("id") Long id) {
         this.restaurantTypeService.deleteById(id);
     }
-    
+
     /**
-   	 * Traite les requêtes POST /
-   	 * @return
-   	 */
+     * Traite les requêtes POST /
+     * @return
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public RestaurantType save(RestaurantType restaurantType) {
         return this.restaurantTypeService.save(restaurantType);
     }
-  
+
+    /**
+     * Traite les requêtes PUT /{id}
+     * @param id
+     * @param restaurantType
+     * @return
+     */
+    @PUT
+    @Path("/{id:[0-9][0-9]*}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public RestaurantType update(@PathParam("id") Long id, RestaurantType restaurantType) {
+        // Assurez-vous que l'id du restaurantType correspond à l'id du PathParam
+        if (!id.equals(restaurantType.getId())) {
+            throw new WebApplicationException("ID mismatch", 400);
+        }
+        return this.restaurantTypeService.save(restaurantType);
+    }
 }

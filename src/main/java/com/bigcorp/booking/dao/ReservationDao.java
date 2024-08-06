@@ -12,16 +12,20 @@ import java.util.List;
 public class ReservationDao {
 
     @PersistenceContext
-    private EntityManager entityManager;
+    EntityManager entityManager;
 
-    @TransactionAttribute
-    public Reservation findById(Integer id) {
-        return entityManager.find(Reservation.class, id);
-    }
+    public Reservation findById(Integer id) {return entityManager.find(Reservation.class, id);}
 
     public List<Reservation> findAll() {
-        TypedQuery<Reservation> query = entityManager.createQuery("SELECT r FROM Reservation r", Reservation.class);
-        return query.getResultList();
+        return this.entityManager.createQuery("select distinct r from Reservation r", Reservation.class)
+                .getResultList();
+    }
+
+    public Reservation findReservationByClientLikeName(String name) {
+        TypedQuery<Reservation> query = entityManager.createQuery(
+                "select r from Reservation r where r.client.name like :name", Reservation.class);
+        query.setParameter("name", "%" + name + "%");
+        return query.getSingleResult();
     }
 
     @TransactionAttribute
@@ -39,16 +43,23 @@ public class ReservationDao {
 
     public List<Reservation> findByClientName(String clientName) {
         TypedQuery<Reservation> query = entityManager.createQuery(
-                "SELECT r FROM Reservation r WHERE r.client.name = :clientName", Reservation.class);
+                "select r from Reservation r where r.client.name = :clientName", Reservation.class);
         query.setParameter("clientName", clientName);
         return query.getResultList();
     }
 
-    public Reservation findReservationWithClient(Integer id) {
+    public Reservation findReservationByClient(Integer id) {
         TypedQuery<Reservation> query = entityManager.createQuery(
-                "SELECT r FROM Reservation r INNER JOIN FETCH r.client " +
-                        "WHERE r.id = :id", Reservation.class);
+                "select r from Reservation r inner join fetch r.client " +
+                        "where r.id = :id", Reservation.class);
         query.setParameter("id", id);
         return query.getSingleResult();
+    }
+
+    public List<String> findReservationEmailsByClientId(Integer clientId) {
+        TypedQuery<String> query = entityManager.createQuery(
+                "select r.client.email from Reservation r where r.client.id = :clientId", String.class);
+        query.setParameter("clientId", clientId);
+        return query.getResultList();
     }
 }

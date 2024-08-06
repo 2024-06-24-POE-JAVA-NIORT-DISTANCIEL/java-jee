@@ -1,6 +1,7 @@
 package com.bigcorp.booking.model;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,6 +13,7 @@ public class Reservation {
     private LocalDateTime reservationDateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="CLIENT_ID")
     private Client client;
 
     // Getters and Setters

@@ -1,13 +1,9 @@
 package com.bigcorp.booking.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * Entité : décrit des données persistées dans une classe (un POJO)
- */
 @Entity
 public class Client {
 
@@ -21,34 +17,72 @@ public class Client {
     private int age;
     private boolean premium;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
+    private Set<Reservation> reservations = new HashSet<>();
 
-    // Getters et Setters
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
 
-    public Integer getId() {return id;}
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
+    }
 
-    public void setId(Integer id) {this.id = id;}
+    // Getters and Setters
 
-    public String getName() {return name;}
+    public Integer getId() {
+        return id;
+    }
 
-    public void setName(String name) {this.name = name;}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-    public String getEmail() {return email;}
+    public String getName() {
+        return name;
+    }
 
-    public void setEmail(String email) {this.email = email;}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public String getPhone() {return phone;}
+    public String getEmail() {
+        return email;
+    }
 
-    public void setPhone(String phone) {this.phone = phone;}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public String getAddress() {return address;}
+    public String getPhone() {
+        return phone;
+    }
 
-    public void setAddress(String address) {this.address = address;}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-    public int getAge() {return age;}
+    public String getAddress() {
+        return address;
+    }
 
-    public void setAge(int age) {this.age = age;}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-    public boolean isPremium() {return premium;}
+    public int getAge() {
+        return age;
+    }
 
-    public void setPremium(boolean premium) {this.premium = premium;}
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public boolean isPremium() {
+        return premium;
+    }
+
+    public void setPremium(boolean premium) {
+        this.premium = premium;
+    }
 }

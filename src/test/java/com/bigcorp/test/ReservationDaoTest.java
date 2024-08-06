@@ -70,11 +70,50 @@ public class ReservationDaoTest {
         Reservation savedReservation = reservationDao.save(reservation);
 
         // Retrieve the reservation and ensure the client's name can be displayed
-        Reservation retrievedReservation = reservationDao.findReservationWithClient(savedReservation.getId());
+        Reservation retrievedReservation = reservationDao.findReservationByClient(savedReservation.getId());
         Assertions.assertNotNull(retrievedReservation);
         Assertions.assertNotNull(retrievedReservation.getClient());
         printSeparator();
-        System.out.println("Client Name: " + retrievedReservation.getClient().getName());
+        System.out.println("Reservation ID: " + retrievedReservation.getId());
+        System.out.println("Reservation Date/Time: " + retrievedReservation.getReservationDateTime());
         printSeparator();
+        System.out.println("Client Name: " + retrievedReservation.getClient().getName());
+        System.out.println("Client Email: " + retrievedReservation.getClient().getEmail());
+        System.out.println("Client Phone: " + retrievedReservation.getClient().getPhone());
+        System.out.println("Client Address: " + retrievedReservation.getClient().getAddress());
+        System.out.println("Client Age: " + retrievedReservation.getClient().getAge());
+        System.out.println("Client Premium: " + retrievedReservation.getClient().isPremium());
+        printSeparator();
+    }
+
+    @Test
+    public void testFindReservationEmailsByClientId() {
+        // Create and save a client
+        Client client = new Client();
+        client.setName("Jane Doe");
+        client.setEmail("jane.doe@example.com");
+        client.setPhone("1234567890");
+        client.setAddress("456 Oak Street");
+        client.setAge(28);
+        client.setPremium(false);
+        Client savedClient = clientDao.save(client);
+
+        // Create and save multiple reservations linked to the client
+        Reservation reservation1 = new Reservation();
+        reservation1.setReservationDateTime(LocalDateTime.of(2024, 10, 10, 18, 0));
+        reservation1.setClient(savedClient);
+        reservationDao.save(reservation1);
+
+        Reservation reservation2 = new Reservation();
+        reservation2.setReservationDateTime(LocalDateTime.of(2024, 11, 15, 19, 30));
+        reservation2.setClient(savedClient);
+        reservationDao.save(reservation2);
+
+        // Find reservation emails by client ID
+        List<String> emails = reservationDao.findReservationEmailsByClientId(savedClient.getId());
+        Assertions.assertFalse(emails.isEmpty(), "Emails should be found for client ID " + savedClient.getId());
+        for (String email : emails) {
+            System.out.println("Reservation Email: " + email);
+        }
     }
 }
