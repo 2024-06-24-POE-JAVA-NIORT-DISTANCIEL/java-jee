@@ -27,8 +27,9 @@ public class RestaurantTypeRestController {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<RestaurantType> listAll() {
-        return this.restaurantTypeService.findAll();
+    public List<RestaurantTypeDto> listAll() {
+        List<RestaurantTypeDto> allRestaurants = this.restaurantTypeService.findAll();
+        return allRestaurants;
     }
 
     /**
@@ -38,7 +39,7 @@ public class RestaurantTypeRestController {
     @GET
     @Path("/{id:[0-9][0-9]*}")
     @Produces(MediaType.APPLICATION_JSON)
-    public RestaurantType getById(@PathParam("id") Long id) {
+    public RestaurantTypeDto getById(@PathParam("id") Long id) {
         return this.restaurantTypeService.findById(id);
     }
 
@@ -59,8 +60,8 @@ public class RestaurantTypeRestController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public RestaurantType save(RestaurantType restaurantType) {
-        return this.restaurantTypeService.save(restaurantType);
+    public RestaurantTypeDto save(RestaurantTypeDto restaurantTypeDto) {
+        return this.restaurantTypeService.save(restaurantTypeDto);
     }
 
     /**

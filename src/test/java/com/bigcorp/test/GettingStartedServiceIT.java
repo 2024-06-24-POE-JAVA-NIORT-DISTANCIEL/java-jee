@@ -1,5 +1,6 @@
 package com.bigcorp.test;
 
+import com.bigcorp.booking.rest.RestaurantTypeDto;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -32,16 +33,8 @@ public class GettingStartedServiceIT {
 
 	@Test
 	public void testService() {
-		RestaurantType restaurantType = new RestaurantType();
-		RestaurantType saved = this.service.save(restaurantType);
-		
-		Assertions.assertNotNull(saved.getId());
-	}
-
-	@Test
-	public void testService2() {
-		RestaurantType restaurantType = new RestaurantType();
-		RestaurantType saved = this.service.save(restaurantType);
+		RestaurantTypeDto restaurantTypeDto = new RestaurantTypeDto();
+		RestaurantTypeDto saved = this.service.save(restaurantTypeDto);
 		
 		Assertions.assertNotNull(saved.getId());
 	}

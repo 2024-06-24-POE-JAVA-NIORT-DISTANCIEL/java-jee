@@ -1,7 +1,10 @@
 package com.bigcorp.booking.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.bigcorp.booking.correction.model.Restaurant;
+import com.bigcorp.booking.rest.RestaurantTypeDto;
 import org.jboss.logging.Logger;
 
 import com.bigcorp.booking.dao.RestaurantTypeDao;
@@ -23,41 +26,83 @@ public class RestaurantTypeService {
 	@Inject
 	private RestaurantTypeDao restaurantTypeDao;
 
-	public RestaurantType findById(Long id) {
-		return this.restaurantTypeDao.findById(id);
+	public RestaurantTypeDto findById(Long id) {
+		return toDto(this.restaurantTypeDao.findById(id));
 	}
 
-	public RestaurantType findWithRestaurantsById(Long id) {
-		return this.restaurantTypeDao.findWithRestaurantsById(id);
+	public RestaurantTypeDto findWithRestaurantsById(Long id) {
+		return toDto(this.restaurantTypeDao.findWithRestaurantsById(id));
 	}
 
 	@TransactionAttribute
-	public RestaurantType save(RestaurantType restaurantType) {
-		LOGGER.info("Sauvegarde de : " + restaurantType);
-		return this.restaurantTypeDao.save(restaurantType);
+	public RestaurantTypeDto save(RestaurantTypeDto restaurantTypeDto) {
+		LOGGER.info("Sauvegarde de : " + restaurantTypeDto);
+		if(restaurantTypeDto.getName() == null){
+			throw new IllegalArgumentException("Impossible de sauvegarder un restaurant dont le nom est null");
+		}
+		RestaurantType restaurantTypeSauvegarde = this.restaurantTypeDao.save(toEntity(restaurantTypeDto));
+		return toDto(restaurantTypeSauvegarde);
 	}
 
-//	@TransactionAttribute
-//	public RestaurantType update(RestaurantType restaurantType) {
-//		LOGGER.info("Mise à jour de : " + restaurantType);
-//		// Vérifiez si l'entité existe avant de mettre à jour
-//		RestaurantType existing = this.restaurantTypeDao.findById(restaurantType.getId());
-//		if (existing == null) {
-//			throw new IllegalArgumentException("RestaurantType not found for ID: " + restaurantType.getId());
-//		}
-//		return this.restaurantTypeDao.update(restaurantType);
-//	}
-
-	public List<RestaurantType> findLikeName(String restaurantTypeFilter) {
-		return this.restaurantTypeDao.findLikeName(restaurantTypeFilter);
+	public List<RestaurantTypeDto> findLikeName(String restaurantTypeFilter) {
+		List<RestaurantType> restaurantsCharges = this.restaurantTypeDao.findLikeName(restaurantTypeFilter);
+		return toDtos(restaurantsCharges);
 	}
 
-	public List<RestaurantType> findAll() {
-		return this.restaurantTypeDao.findAll();
+	public List<RestaurantTypeDto> findAll() {
+		List<RestaurantType> restaurantsCharges =  this.restaurantTypeDao.findAll();
+		return toDtos(restaurantsCharges);
 	}
 
 	public void deleteById(Long id) {
 		this.restaurantTypeDao.deleteById(id);
+	}
+
+	/**
+	 * Transforme une entity en DTO
+	 * @param entity
+	 * @return
+	 */
+	private RestaurantTypeDto toDto(RestaurantType entity) {
+		if(entity == null){
+			return null;
+		}
+		RestaurantTypeDto dto = new RestaurantTypeDto();
+		dto.setId(entity.getId());
+		dto.setName(entity.getName());
+		if(entity.getName().startsWith("miam")){
+			dto.setNameCommenceParMiam(true);
+		}
+		return dto;
+	}
+
+	/**
+	 * Transforme un DTO en entity
+	 * @param dto
+	 * @return
+	 */
+	private RestaurantType toEntity(RestaurantTypeDto dto){
+		if(dto == null){
+			return null;
+		}
+		RestaurantType entity = new RestaurantType();
+		entity.setId(dto.getId());
+		entity.setName(dto.getName());
+		return entity;
+	}
+
+
+	/**
+	 * Transforme une liste d'entités en liste de DTOs
+	 * @param entities non null (non mais !)
+	 * @return une collection, peut être vide, mais pas nulle.
+	 */
+	private List<RestaurantTypeDto> toDtos(List<RestaurantType> entities) {
+		List<RestaurantTypeDto> dtos = new ArrayList<>();
+		for(RestaurantType entity : entities){
+			dtos.add(toDto(entity));
+		}
+		return dtos;
 	}
 
 }
