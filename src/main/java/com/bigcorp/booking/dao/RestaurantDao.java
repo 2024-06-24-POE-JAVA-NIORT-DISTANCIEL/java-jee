@@ -1,6 +1,6 @@
-package com.bigcorp.booking.correction.dao;
+package com.bigcorp.booking.dao;
 
-import com.bigcorp.booking.correction.model.Restaurant;
+import com.bigcorp.booking.model.Restaurant;
 import jakarta.ejb.Stateless;
 import jakarta.ejb.TransactionAttribute;
 import jakarta.persistence.EntityManager;

@@ -1,7 +1,7 @@
-package com.bigcorp.booking.correction.model;
+package com.bigcorp.booking.model;
 
-import com.bigcorp.booking.model.RestaurantType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDateTime;
 
@@ -35,11 +35,16 @@ public class Restaurant {
      * Les autres attributs sont automatiquement persistés dans une colonne
      * qui porte le même nom que l'attribut
      */
+    @NotNull(message = "Le nom est obligatoire.")
+    @Size(min = 3, max = 30, message = "Le nom doit comporter entre 3 et 30 caractères.")
     private String nom;
 
+    @NotNull(message = "L'adresse est obligatoire.")
+    @Size(min = 3, max = 50, message = "L'adresse doit comporter entre 3 et 50 caractères.")
     private String adresse;
 
     @Enumerated(EnumType.STRING)
+    @Min(value = 1, message = "Le prix doit être au minimum de 1 euros.")
     private Prix prix;
 
     private LocalDateTime ouverture;
@@ -50,6 +55,8 @@ public class Restaurant {
      * l'attribut
      */
     @Column(name = "ADRESSE_SPECIALE")
+    @NotNull(message = "L'adresse est obligatoire.")
+    @Size(min = 3, max = 50, message = "L'adresse doit comporter entre 3 et 50 caractères.")
     private String adresseDuPatron;
 
     private Boolean actif;

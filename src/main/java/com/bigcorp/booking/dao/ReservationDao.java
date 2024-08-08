@@ -14,7 +14,7 @@ public class ReservationDao {
     @PersistenceContext
     EntityManager entityManager;
 
-    public Reservation findById(Integer id) {return entityManager.find(Reservation.class, id);}
+    public Reservation findById(Long id) {return entityManager.find(Reservation.class, id);}
 
     public List<Reservation> findAll() {
         return this.entityManager.createQuery("select distinct r from Reservation r", Reservation.class)
@@ -34,7 +34,7 @@ public class ReservationDao {
     }
 
     @TransactionAttribute
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         Reservation reservation = entityManager.find(Reservation.class, id);
         if (reservation != null) {
             entityManager.remove(reservation);
@@ -48,7 +48,7 @@ public class ReservationDao {
         return query.getResultList();
     }
 
-    public Reservation findReservationByClient(Integer id) {
+    public Reservation findReservationByClient(Long id) {
         TypedQuery<Reservation> query = entityManager.createQuery(
                 "select r from Reservation r inner join fetch r.client " +
                         "where r.id = :id", Reservation.class);
@@ -56,7 +56,7 @@ public class ReservationDao {
         return query.getSingleResult();
     }
 
-    public List<String> findReservationEmailsByClientId(Integer clientId) {
+    public List<String> findReservationEmailsByClientId(Long clientId) {
         TypedQuery<String> query = entityManager.createQuery(
                 "select r.client.email from Reservation r where r.client.id = :clientId", String.class);
         query.setParameter("clientId", clientId);

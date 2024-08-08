@@ -1,20 +1,15 @@
-package com.bigcorp.booking.model;
+package com.bigcorp.booking.dto;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+//import lombok.Data;
 
-import java.util.HashSet;
-import java.util.Set;
+public class ClientDto {
 
-@Entity
-public class Client {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Null(message = "L'id doit être nul lors de la création d'un client.")
     private Long id;
 
     @NotNull(message = "Le nom est obligatoire.")
-    @Size(min = 3, max = 30, message = "Le nom doit comporter entre 3 et 30 caractères.")
+    @Size(min = 1, max = 100, message = "Le nom doit comporter entre 1 et 100 caractères.")
     private String name;
 
     @NotNull(message = "L'email est obligatoire.")
@@ -25,7 +20,7 @@ public class Client {
     private String phone;
 
     @NotNull(message = "L'adresse est obligatoire.")
-    @Size(min = 3, max = 50, message = "L'adresse doit comporter entre 3 et 50 caractères.")
+    @Size(min = 1, max = 255, message = "L'adresse doit comporter entre 1 et 255 caractères.")
     private String address;
 
     @Min(value = 18, message = "L'âge doit être au moins 18 ans.")
@@ -34,18 +29,7 @@ public class Client {
 
     private boolean premium;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
-    private Set<Reservation> reservations = new HashSet<>();
-
-    // Getters and Setters
-
-    public Set<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(Set<Reservation> reservations) {
-        this.reservations = reservations;
-    }
+    // Getters et Setters
 
     public Long getId() {
         return id;

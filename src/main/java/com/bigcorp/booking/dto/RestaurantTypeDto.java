@@ -1,4 +1,4 @@
-package com.bigcorp.booking.rest;
+package com.bigcorp.booking.dto;
 
 /**
  * DTO : Data Transfer Object : POJO

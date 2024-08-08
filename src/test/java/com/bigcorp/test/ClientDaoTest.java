@@ -1,6 +1,5 @@
 package com.bigcorp.test;
 
-import com.bigcorp.booking.correction.model.Restaurant;
 import com.bigcorp.booking.dao.ClientDao;
 import com.bigcorp.booking.model.Client;
 import jakarta.inject.Inject;

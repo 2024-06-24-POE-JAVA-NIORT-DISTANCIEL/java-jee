@@ -1,13 +1,20 @@
 package com.bigcorp.booking.rest;
 
+
 import java.util.List;
 
-import com.bigcorp.booking.model.RestaurantType;
+import com.bigcorp.booking.dto.RestaurantTypeDto;
 import com.bigcorp.booking.service.RestaurantTypeService;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
 /**
@@ -64,21 +71,4 @@ public class RestaurantTypeRestController {
         return this.restaurantTypeService.save(restaurantTypeDto);
     }
 
-    /**
-     * Traite les requêtes PUT /{id}
-     * @param id
-     * @param restaurantType
-     * @return
-     */
-    @PUT
-    @Path("/{id:[0-9][0-9]*}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public RestaurantType update(@PathParam("id") Long id, RestaurantType restaurantType) {
-        // Assurez-vous que l'id du restaurantType correspond à l'id du PathParam
-        if (!id.equals(restaurantType.getId())) {
-            throw new WebApplicationException("ID mismatch", 400);
-        }
-        return this.restaurantTypeService.save(restaurantType);
-    }
 }

@@ -3,8 +3,7 @@ package com.bigcorp.booking.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bigcorp.booking.correction.model.Restaurant;
-import com.bigcorp.booking.rest.RestaurantTypeDto;
+import com.bigcorp.booking.dto.RestaurantTypeDto;
 import org.jboss.logging.Logger;
 
 import com.bigcorp.booking.dao.RestaurantTypeDao;
@@ -20,7 +19,7 @@ import jakarta.inject.Inject;
  */
 @Stateless
 public class RestaurantTypeService {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(RestaurantTypeService.class);
 
 	@Inject
@@ -104,5 +103,4 @@ public class RestaurantTypeService {
 		}
 		return dtos;
 	}
-
 }

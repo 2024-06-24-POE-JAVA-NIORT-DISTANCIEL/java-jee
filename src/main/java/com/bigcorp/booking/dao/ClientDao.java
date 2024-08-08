@@ -1,24 +1,16 @@
 package com.bigcorp.booking.dao;
 
-import java.util.List;
-
-import com.bigcorp.booking.correction.model.Restaurant;
 import com.bigcorp.booking.model.Client;
-import com.bigcorp.booking.rest.JaxRsActivator;
-import jakarta.annotation.Resource;
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ejb.Stateless;
-import jakarta.ejb.TransactionAttribute;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
-import jakarta.persistence.NoResultException;
 
-import javax.sql.DataSource;
+import java.util.List;
 
 /**
- * DAO s'appuyant sur un entityManager JPA
+ * DAO pour les opérations CRUD sur Client avec JPA.
  */
 @Stateless
 public class ClientDao {
@@ -27,62 +19,54 @@ public class ClientDao {
     private EntityManager entityManager;
 
     /**
-     * Trouve un client par son ID
+     * Trouve un client par son ID.
      * @param id l'identifiant du client
      * @return le client trouvé ou null s'il n'existe pas
      */
-    @TransactionAttribute
-    public Client findById(Integer id) {
-        try {
-            return entityManager.find(Client.class, id);
-        } catch (NoResultException e) {
-            return null;
-        }
+    @Transactional
+    public Client findById(Long id) {
+        return entityManager.find(Client.class, id);
     }
 
     /**
-     * Récupère tous les clients en base à partir de leur nom (insensible à la casse)
-     * @param name
-     * @return
+     * Récupère tous les clients en base à partir de leur nom (insensible à la casse).
+     * @param name le nom du client
+     * @return la liste des clients trouvés
      */
-    public List<Client> findByName(String name){
+    public List<Client> findByName(String name) {
         TypedQuery<Client> query = entityManager.createQuery(
-                "select r from Client r where LOWER(r.name) = LOWER(:name)", Client.class);
+                "SELECT c FROM Client c WHERE LOWER(c.name) = LOWER(:name)", Client.class);
         query.setParameter("name", name);
-        List<Client> resultat = query.getResultList();
-        return resultat;
+        return query.getResultList();
     }
 
     /**
-     * Récupère tous les clients en base à partir de leur nom (insensible à la casse)
-     * @param name
-     * @return
+     * Récupère tous les clients en base à partir de leur nom (insensible à la casse).
+     * @param name le nom du client (partiel)
+     * @return la liste des clients trouvés
      */
-    public List<Client> findByNameLike(String name){
+    public List<Client> findByNameLike(String name) {
         TypedQuery<Client> query = entityManager.createQuery(
-                "select r from Client r where lower(r.name) like lower(:name)", Client.class);
+                "SELECT c FROM Client c WHERE LOWER(c.name) LIKE LOWER(:name)", Client.class);
         query.setParameter("name", "%" + name + "%");
-        List<Client> resultat = query.getResultList();
-        return resultat;
+        return query.getResultList();
     }
 
-
     /**
-     * Trouve tous les clients
-     * @return la liste des clients
+     * Trouve tous les clients.
+     * @return la liste de tous les clients
      */
-    @TransactionAttribute
+    @Transactional
     public List<Client> findAll() {
-        return entityManager.createQuery("SELECT c FROM Client c", Client.class)
-                .getResultList();
+        return entityManager.createQuery("SELECT c FROM Client c", Client.class).getResultList();
     }
 
     /**
-     * Sauvegarde ou met à jour un client
+     * Sauvegarde ou met à jour un client.
      * @param client le client à sauvegarder ou mettre à jour
-     * @return le client sauvegardé avec un ID généré
+     * @return le client sauvegardé ou mis à jour
      */
-    @TransactionAttribute
+    @Transactional
     public Client save(Client client) {
         if (client.getId() == null) {
             entityManager.persist(client);
@@ -93,16 +77,22 @@ public class ClientDao {
     }
 
     /**
-     * Supprime un client par son ID
+     * Vérifie si un client existe par son ID.
+     * @param id l'identifiant du client
+     * @return true si le client existe, false sinon
+     */
+    public boolean existsById(Long id) {
+        return entityManager.find(Client.class, id) != null;
+    }
+    /**
+     * Supprime un client par son ID.
      * @param id l'identifiant du client à supprimer
      */
-    @TransactionAttribute
-    public void deleteById(Integer id) {
+    @Transactional
+    public void deleteById(Long id) {
         Client client = entityManager.find(Client.class, id);
         if (client != null) {
             entityManager.remove(client);
-            return;
         }
-        entityManager.remove(client);
     }
 }

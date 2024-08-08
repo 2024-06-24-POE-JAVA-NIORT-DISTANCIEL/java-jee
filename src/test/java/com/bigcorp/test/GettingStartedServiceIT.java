@@ -1,6 +1,6 @@
 package com.bigcorp.test;
 
-import com.bigcorp.booking.rest.RestaurantTypeDto;
+import com.bigcorp.booking.dto.RestaurantTypeDto;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -10,10 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import com.bigcorp.booking.dao.RestaurantTypeDao;
-import com.bigcorp.booking.model.RestaurantType;
 import com.bigcorp.booking.service.RestaurantTypeService;
-import com.bigcorp.booking.util.Resources;
 
 import jakarta.inject.Inject;
 

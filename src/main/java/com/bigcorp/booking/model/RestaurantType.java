@@ -1,9 +1,8 @@
 package com.bigcorp.booking.model;
 
-import com.bigcorp.booking.correction.model.Restaurant;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +15,9 @@ public class RestaurantType {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	
+
+	@NotNull(message = "Le nom est obligatoire.")
+	@Size(min = 3, max = 30, message = "Le nom doit comporter entre 3 et 30 caractères.")
 	private String name;
 
 	/**
@@ -27,7 +28,7 @@ public class RestaurantType {
 	 */
 	@OneToMany(mappedBy = "restaurantType")
 	private Set<Restaurant> restaurants = new HashSet<>();
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -52,5 +53,3 @@ public class RestaurantType {
 		this.restaurants = restaurants;
 	}
 }
-
-
