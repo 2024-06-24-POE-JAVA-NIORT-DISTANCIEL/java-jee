@@ -29,6 +29,17 @@ public class RestaurantTypeRestController {
     private RestaurantTypeService restaurantTypeService;
 
     /**
+     * Traite les requêtes POST /
+     * @return
+     */
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public RestaurantTypeDto save(RestaurantTypeDto restaurantTypeDto) {
+        return this.restaurantTypeService.save(restaurantTypeDto);
+    }
+
+    /**
      * Traite les requêtes GET /
      * @return
      */
@@ -59,16 +70,4 @@ public class RestaurantTypeRestController {
     public void deleteById(@PathParam("id") Long id) {
         this.restaurantTypeService.deleteById(id);
     }
-
-    /**
-     * Traite les requêtes POST /
-     * @return
-     */
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public RestaurantTypeDto save(RestaurantTypeDto restaurantTypeDto) {
-        return this.restaurantTypeService.save(restaurantTypeDto);
-    }
-
 }

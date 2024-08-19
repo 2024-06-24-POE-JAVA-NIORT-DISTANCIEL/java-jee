@@ -1,6 +1,7 @@
 package com.bigcorp.booking.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDateTime;
 
@@ -9,11 +10,15 @@ public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Null(message = "L'id doit être nul lors de la création d'une reservation.")
     private Long id;
+
+    @NotNull(message = "La date et l'heure de la réservation ne peuvent pas être nulles.")
     private LocalDateTime reservationDateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="CLIENT_ID")
+    @NotNull(message = "Le client ne peut pas être nul.")
     private Client client;
 
     // Getters and Setters

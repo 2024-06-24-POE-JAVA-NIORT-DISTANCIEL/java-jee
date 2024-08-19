@@ -33,6 +33,20 @@ public class ClientService {
     }
 
     /**
+     * Récupère tous les clients en base.
+     * @return la liste des clients en DTO
+     */
+    public List<ClientDto> findAll() {
+        List<Client> clients = clientDao.findAll();
+        logCall("findAll", "Clients trouvés", clients);
+        if (clients.isEmpty()) {
+            logCall("findAll", "Aucun client trouvé");
+            return null;
+        }
+        return toDtos(clients);
+    }
+
+    /**
      * Trouve un client par son ID.
      * @param id l'identifiant du client
      * @return le client en DTO
@@ -57,17 +71,6 @@ public class ClientService {
         logCall("findByNamelike", "Début", name);
         List<Client> clients = clientDao.findByNameLike(name);
         logCall("findByNamelike", "Clients trouvés", clients);
-        return toDtos(clients);
-    }
-
-    /**
-     * Récupère tous les clients en base.
-     * @return la liste des clients en DTO
-     */
-    public List<ClientDto> findAll() {
-        logCall("findAll", "Début");
-        List<Client> clients = clientDao.findAll();
-        logCall("findAll", "Clients trouvés", clients);
         return toDtos(clients);
     }
 

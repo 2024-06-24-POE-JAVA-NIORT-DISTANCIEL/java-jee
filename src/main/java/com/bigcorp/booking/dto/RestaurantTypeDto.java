@@ -1,5 +1,7 @@
 package com.bigcorp.booking.dto;
 
+import jakarta.validation.constraints.*;
+
 /**
  * DTO : Data Transfer Object : POJO
  * pas très malin qui sert juste à transférer des données
@@ -7,6 +9,7 @@ package com.bigcorp.booking.dto;
  */
 public class RestaurantTypeDto {
 
+    @Null(message = "L'id doit être nul lors de la création d'un client.")
     private Long id;
 
     private String name;
