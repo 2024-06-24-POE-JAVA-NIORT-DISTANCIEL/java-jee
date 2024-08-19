@@ -232,7 +232,7 @@ public class ClientRestController {
             boolean deleted = clientService.deleteById(id);
             if (deleted) {
                 // Si la suppression est réussie, renvoie un statut 200 (OK) avec un message de confirmation
-                String message = "Client id: " + id + ", " + clientDto.getName() + " supprimé avec succès.";
+                String message = "Client id: " + id + ", " + clientDto.getNom() + " supprimé avec succès.";
                 Map<String, Object> response = new HashMap<>();
                 response.put("message", message);
                 return Response

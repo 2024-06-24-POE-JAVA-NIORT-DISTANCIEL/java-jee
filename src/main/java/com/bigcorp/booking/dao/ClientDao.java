@@ -35,20 +35,20 @@ public class ClientDao {
      */
     public List<Client> findByName(String name) {
         TypedQuery<Client> query = entityManager.createQuery(
-                "SELECT c FROM Client c WHERE LOWER(c.name) = LOWER(:name)", Client.class);
-        query.setParameter("name", name);
+                "SELECT c FROM Client c WHERE LOWER(c.nom) = LOWER(:nom)", Client.class);
+        query.setParameter("nom", name);
         return query.getResultList();
     }
 
     /**
      * Récupère tous les clients en base à partir de leur nom (insensible à la casse).
-     * @param name le nom du client (partiel)
+     * @param nom le nom du client (partiel)
      * @return la liste des clients trouvés
      */
-    public List<Client> findByNameLike(String name) {
+    public List<Client> findByNameLike(String nom) {
         TypedQuery<Client> query = entityManager.createQuery(
-                "SELECT c FROM Client c WHERE LOWER(c.name) LIKE LOWER(:name)", Client.class);
-        query.setParameter("name", "%" + name + "%");
+                "SELECT c FROM Client c WHERE LOWER(c.nom) LIKE LOWER(:nom)", Client.class);
+        query.setParameter("nom", "%" + nom + "%");
         return query.getResultList();
     }
 

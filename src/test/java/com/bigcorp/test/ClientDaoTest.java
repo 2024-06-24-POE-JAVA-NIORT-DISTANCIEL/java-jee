@@ -43,7 +43,7 @@ public class ClientDaoTest {
     private void printClientInfo(String action, Client client) {
         System.out.println(action + " - Client Info: ");
         System.out.println("ID: " + (client.getId() != null ? client.getId() : "Not saved yet"));
-        System.out.println("Name: " + client.getName());
+        System.out.println("Name: " + client.getNom());
         System.out.println("Email: " + client.getEmail());
         System.out.println("Phone: " + client.getPhone());
         System.out.println("Address: " + client.getAddress());
@@ -55,7 +55,7 @@ public class ClientDaoTest {
     @Test
     public void testFindAll() {
         Client client1 = new Client();
-        client1.setName("Alice");
+        client1.setNom("Alice");
         client1.setEmail("alice@example.com");
         client1.setPhone("9876543210");
         client1.setAddress("456 Oak Avenue");
@@ -64,7 +64,7 @@ public class ClientDaoTest {
         clientDao.save(client1);
 
         Client client2 = new Client();
-        client2.setName("Bob");
+        client2.setNom("Bob");
         client2.setEmail("bob@example.com");
         client2.setPhone("5555555555");
         client2.setAddress("789 Pine Road");
@@ -83,7 +83,7 @@ public class ClientDaoTest {
     @Test
     public void testFindById() {
         Client client = new Client();
-        client.setName("John Doe");
+        client.setNom("John Doe");
         client.setEmail("john.doe@example.com");
         client.setPhone("1234567890");
         client.setAddress("123 Elm Street");
@@ -95,7 +95,7 @@ public class ClientDaoTest {
         Client foundClient = clientDao.findById(savedClient.getId());
         printClientInfo("Found by ID", foundClient);
         Assertions.assertNotNull(foundClient, "Client should be found by ID, but was null");
-        Assertions.assertEquals("John Doe", foundClient.getName(), "Expected name: John Doe, but found: " + foundClient.getName());
+        Assertions.assertEquals("John Doe", foundClient.getNom(), "Expected name: John Doe, but found: " + foundClient.getNom());
     }
 
     @Test
@@ -103,24 +103,24 @@ public class ClientDaoTest {
         //ARRANGE
         //Création du client
         Client client = new Client();
-        client.setName("Marc");
+        client.setNom("Marc");
         Client clientSauvegarde = clientDao.save(client);
 
         //ACT
         //Récupération du client de la base de données avec le bon nom
-        List<Client> resultat = clientDao.findByName(client.getName());
+        List<Client> resultat = clientDao.findByName(client.getNom());
 
         //ASSERT
         Assertions.assertEquals(1, resultat.size());
         Client clientCharge = resultat.get(0);
-        Assertions.assertEquals(client.getName(), clientCharge.getName());
+        Assertions.assertEquals(client.getNom(), clientCharge.getNom());
     }
 
     @Test
     public void testSaveAndFindByNameLike(){
         // Create the client
         Client client = new Client();
-        client.setName("malinou");
+        client.setNom("malinou");
         Client savedClient = clientDao.save(client);
 
         // Retrieve the client from the database with a similar name
@@ -129,13 +129,13 @@ public class ClientDaoTest {
         // Assertions
         Assertions.assertFalse(result.isEmpty(), "Expected at least one client, but found none");
         Client loadedClient = result.get(0);
-        Assertions.assertEquals(client.getName(), loadedClient.getName(), "Expected name: " + client.getName() + ", but found: " + loadedClient.getName());
+        Assertions.assertEquals(client.getNom(), loadedClient.getNom(), "Expected name: " + client.getNom() + ", but found: " + loadedClient.getNom());
     }
 
     @Test
     public void testCreate() {
         Client newClient = new Client();
-        newClient.setName("Jane Doe");
+        newClient.setNom("Jane Doe");
         newClient.setEmail("jane.doe@example.com");
         newClient.setPhone("0987654321");
         newClient.setAddress("321 Maple Street");
@@ -146,13 +146,13 @@ public class ClientDaoTest {
         printClientInfo("Created", savedClient);
 
         Assertions.assertNotNull(savedClient.getId(), "Client ID should not be null after saving");
-        Assertions.assertEquals("Jane Doe", savedClient.getName(), "Expected name: Jane Doe, but found: " + savedClient.getName());
+        Assertions.assertEquals("Jane Doe", savedClient.getNom(), "Expected name: Jane Doe, but found: " + savedClient.getNom());
     }
 
     @Test
     public void testUpdateById() {
         Client client = new Client();
-        client.setName("Michael Smith");
+        client.setNom("Michael Smith");
         client.setEmail("michael.smith@example.com");
         client.setPhone("1111111111");
         client.setAddress("456 Birch Road");
@@ -175,7 +175,7 @@ public class ClientDaoTest {
     public void testDeleteById() {
         //Création du client
         Client client = new Client();
-        client.setName("Emily Davis");
+        client.setNom("Emily Davis");
         client.setEmail("emily.davis@example.com");
         client.setPhone("3333333333");
         client.setAddress("1010 Spruce Lane");

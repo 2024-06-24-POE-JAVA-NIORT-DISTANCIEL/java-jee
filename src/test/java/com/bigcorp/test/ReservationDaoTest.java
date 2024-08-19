@@ -55,7 +55,7 @@ public class ReservationDaoTest {
 
         // Create and save a client
         Client client = new Client();
-        client.setName("John Doe");
+        client.setNom("John Doe");
         client.setEmail("john.doe@example.com");
         client.setPhone("0987654321");
         client.setAddress("123 Maple Street");
@@ -77,7 +77,7 @@ public class ReservationDaoTest {
         System.out.println("Reservation ID: " + retrievedReservation.getId());
         System.out.println("Reservation Date/Time: " + retrievedReservation.getReservationDateTime());
         printSeparator();
-        System.out.println("Client Name: " + retrievedReservation.getClient().getName());
+        System.out.println("Client Name: " + retrievedReservation.getClient().getNom());
         System.out.println("Client Email: " + retrievedReservation.getClient().getEmail());
         System.out.println("Client Phone: " + retrievedReservation.getClient().getPhone());
         System.out.println("Client Address: " + retrievedReservation.getClient().getAddress());
@@ -90,7 +90,7 @@ public class ReservationDaoTest {
     public void testFindReservationEmailsByClientId() {
         // Create and save a client
         Client client = new Client();
-        client.setName("Jane Doe");
+        client.setNom("Jane Doe");
         client.setEmail("jane.doe@example.com");
         client.setPhone("1234567890");
         client.setAddress("456 Oak Street");

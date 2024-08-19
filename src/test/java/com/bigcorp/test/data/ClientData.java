@@ -22,9 +22,9 @@ public class ClientData {
         return clients;
     }
 
-    private static Client createClient(String name, String email, String phone, String address, int age, boolean premium) {
+    private static Client createClient(String nom, String email, String phone, String address, int age, boolean premium) {
         Client client = new Client();
-        client.setName(name);
+        client.setNom(nom);
         client.setEmail(email);
         client.setPhone(phone);
         client.setAddress(address);

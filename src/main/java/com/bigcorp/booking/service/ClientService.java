@@ -64,12 +64,12 @@ public class ClientService {
 
     /**
      * Récupère les clients dont le nom contient une partie donnée.
-     * @param name la partie du nom du client
+     * @param nom la partie du nom du client
      * @return la liste des clients en DTO
      */
-    public List<ClientDto> findByNameLike(String name) {
-        logCall("findByNamelike", "Début", name);
-        List<Client> clients = clientDao.findByNameLike(name);
+    public List<ClientDto> findByNameLike(String nom) {
+        logCall("findByNamelike", "Début", nom);
+        List<Client> clients = clientDao.findByNameLike(nom);
         logCall("findByNamelike", "Clients trouvés", clients);
         return toDtos(clients);
     }
@@ -115,7 +115,8 @@ public class ClientService {
         }
         ClientDto dto = new ClientDto();
         dto.setId(client.getId());
-        dto.setName(client.getName());
+        dto.setNom(client.getNom());
+        dto.setPrenom(client.getPrenom());
         dto.setEmail(client.getEmail());
         dto.setPhone(client.getPhone());
         dto.setAddress(client.getAddress());
@@ -135,7 +136,8 @@ public class ClientService {
         }
         Client client = new Client();
         client.setId(dto.getId());
-        client.setName(dto.getName());
+        client.setNom(dto.getNom());
+        client.setPrenom(dto.getPrenom());
         client.setEmail(dto.getEmail());
         client.setPhone(dto.getPhone());
         client.setAddress(dto.getAddress());

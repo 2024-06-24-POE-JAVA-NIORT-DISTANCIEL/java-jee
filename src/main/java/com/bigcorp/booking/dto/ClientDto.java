@@ -9,8 +9,12 @@ public class ClientDto {
     private Long id;
 
     @NotNull(message = "Le nom est obligatoire.")
-    @Size(min = 1, max = 100, message = "Le nom doit comporter entre 1 et 100 caractères.")
-    private String name;
+    @Size(min = 3, max = 30, message = "Le nom doit comporter entre 1 et 100 caractères.")
+    private String nom;
+
+    @NotNull(message = "Le prenom est obligatoire.")
+    @Size(min = 3, max = 30, message = "Le prenom doit comporter entre 1 et 100 caractères.")
+    private String prenom;
 
     @NotNull(message = "L'email est obligatoire.")
     @Email(message = "L'email doit être valide.")
@@ -39,12 +43,21 @@ public class ClientDto {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+
+    public String getNom() {
+    return nom;
+}
+
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
     }
 
     public String getEmail() {

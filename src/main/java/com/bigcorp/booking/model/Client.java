@@ -15,7 +15,11 @@ public class Client {
 
     @NotNull(message = "Le nom est obligatoire.")
     @Size(min = 3, max = 30, message = "Le nom doit comporter entre 3 et 30 caractères.")
-    private String name;
+    private String nom;
+
+    @NotNull(message = "Le prenom est obligatoire.")
+    @Size(min = 3, max = 30, message = "Le prenom doit comporter entre 3 et 30 caractères.")
+    private String prenom;
 
     @NotNull(message = "L'email est obligatoire.")
     @Email(message = "L'email doit être valide.")
@@ -55,13 +59,23 @@ public class Client {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNom() {
+        return nom;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+
 
     public String getEmail() {
         return email;
@@ -102,4 +116,7 @@ public class Client {
     public void setPremium(boolean premium) {
         this.premium = premium;
     }
+
+
+
 }
