@@ -1,15 +1,11 @@
 package com.bigcorp.booking.rest;
 
-import com.bigcorp.booking.model.Reservation;
+import com.bigcorp.booking.dto.ReservationDto;
 import com.bigcorp.booking.service.ReservationService;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
+
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
@@ -23,12 +19,12 @@ public class ReservationRestController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createOrUpdateReservation(Reservation reservation) {
+    public Response createOrUpdateReservation(ReservationDto reservationDto) {
         try {
-            Reservation savedReservation = reservationService.saveOrUpdate(reservation);
+            ReservationDto savedReservationDto = reservationService.saveOrUpdate(reservationDto);
             return Response
                     .status(Response.Status.CREATED)
-                    .entity(savedReservation)
+                    .entity(savedReservationDto)
                     .build();
         } catch (IllegalArgumentException e) {
             return Response
@@ -43,10 +39,10 @@ public class ReservationRestController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getReservation(@PathParam("id") Long id) {
         try {
-            Reservation reservation = reservationService.findById(id);
+            ReservationDto reservationDto = reservationService.findById(id);
             return Response
                     .status(Response.Status.OK)
-                    .entity(reservation)
+                    .entity(reservationDto)
                     .build();
         } catch (IllegalArgumentException e) {
             return Response
@@ -55,5 +51,4 @@ public class ReservationRestController {
                     .build();
         }
     }
-
 }
