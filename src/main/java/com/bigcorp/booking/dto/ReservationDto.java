@@ -12,8 +12,8 @@ public class ReservationDto {
     @NotNull(message = "La date et l'heure de la réservation ne peuvent pas être nulles.")
     private LocalDateTime reservationDateTime;
 
-    @NotNull(message = "Le client ne peut pas être nul.")
-    private ClientDto client;
+    @NotNull(message = "Le clientId ne peut pas être nul.")
+    private Long clientId;
 
     // Getters and Setters
 
@@ -33,11 +33,11 @@ public class ReservationDto {
         this.reservationDateTime = reservationDateTime;
     }
 
-    public ClientDto getClient() {
-        return client;
+    public Long getClientId() {
+        return clientId;
     }
 
-    public void setClient(ClientDto client) {
-        this.client = client;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 }

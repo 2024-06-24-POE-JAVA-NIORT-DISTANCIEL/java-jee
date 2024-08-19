@@ -16,15 +16,23 @@ public class ReservationDao {
 
     public Reservation findById(Long id) {return entityManager.find(Reservation.class, id);}
 
+    public boolean existsById(Long id) {
+        String jpql  = "select count(r) from Reservation r where r.id = :id";
+        Long count = entityManager.createQuery(jpql, Long.class)
+                .setParameter("id", id)
+                .getSingleResult();
+        return count > 0;
+    }
+
     public List<Reservation> findAll() {
         return this.entityManager.createQuery("select distinct r from Reservation r", Reservation.class)
                 .getResultList();
     }
 
-    public Reservation findReservationByClientLikeName(String name) {
+    public Reservation findReservationByClientLikeName(String nom) {
         TypedQuery<Reservation> query = entityManager.createQuery(
-                "select r from Reservation r where r.client.name like :name", Reservation.class);
-        query.setParameter("name", "%" + name + "%");
+                "select r from Reservation r where r.client.nom like :nom", Reservation.class);
+        query.setParameter("nom", "%" + nom + "%");
         return query.getSingleResult();
     }
 
@@ -41,10 +49,10 @@ public class ReservationDao {
         }
     }
 
-    public List<Reservation> findByClientName(String clientName) {
+    public List<Reservation> findByClientName(String clientNom) {
         TypedQuery<Reservation> query = entityManager.createQuery(
-                "select r from Reservation r where r.client.name = :clientName", Reservation.class);
-        query.setParameter("clientName", clientName);
+                "select r from Reservation r where r.client.nom = :clientNom", Reservation.class);
+        query.setParameter("clientNom", clientNom);
         return query.getResultList();
     }
 
