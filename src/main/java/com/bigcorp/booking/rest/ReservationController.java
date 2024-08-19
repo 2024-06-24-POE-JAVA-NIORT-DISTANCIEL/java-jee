@@ -1,6 +1,7 @@
 package com.bigcorp.booking.rest;
 
 import java.util.List;
+import org.jboss.logging.Logger;
 
 import com.bigcorp.booking.correction.model.Reservation;
 import com.bigcorp.booking.correction.model.ReservationDto;
@@ -24,13 +25,14 @@ public class ReservationController {
     @Inject
     ReservationService reservationService;
 
+    Logger LOGGER = Logger.getLogger(ReservationController.class);
+
     private final static String VERIFY_ID = "/{id:[0-9]+}";
+    private final static String VERIFY_EMAIL = "^[\\w-.]+@[\\w]{3,}.[\\w]{2,}$";
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    private List<ReservationDto> getAllReservations() {
-        System.out.println("Coucou");
-
+    public List<ReservationDto> getAllReservations() {
         List<ReservationDto> reservationsDto = reservationService.getAllReservation();
 
         return reservationsDto;
@@ -48,8 +50,13 @@ public class ReservationController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    private Response postNewReservation(Reservation reservation) {
-        System.out.println(reservation);
+    public Response postNewReservation(Reservation reservation) {
+        if (!reservation.getEmail().matches(VERIFY_EMAIL)) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                .entity("L'email est invalide")
+                .type(MediaType.TEXT_PLAIN)
+                .build();
+        }
 
         if (reservation.getId() == null) {
             return Response.status(Response.Status.OK)
