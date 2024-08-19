@@ -16,7 +16,13 @@ public class ReservationService {
     private ReservationDao reservationDao;
 
     public ReservationDto getById(Integer id) {
-        return toDto(reservationDao.getBydId(id));
+        Reservation reservation = reservationDao.getBydId(id);
+
+        if (reservation == null) {
+            return null;
+        }
+
+        return toDto(reservation);
     }
 
     public List<ReservationDto> getAllReservation() {
